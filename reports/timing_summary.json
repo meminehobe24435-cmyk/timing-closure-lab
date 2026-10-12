@@ -2171,5 +2171,20 @@
       }
     ],
     "primary_period_ns": 10.0
+  },
+  "verification": {
+    "local": {
+      "command": "py -3.12 -m pytest tests -q",
+      "result": "278 passed, 0 skipped"
+    },
+    "ci_ubuntu": {
+      "result": "277 passed, 1 skipped",
+      "note": "the skipped test is the --sdc capability check: Ubuntu archive nextpnr-ecp5 has no --sdc"
+    },
+    "ci_windows": {
+      "result": "268 passed, 10 skipped",
+      "note": "no EDA toolchain on the runner; the 10 EDA integration tests skip"
+    },
+    "ci_url": "https://github.com/minehobe24435-cmyk/timing-closure-lab/actions"
   }
 }

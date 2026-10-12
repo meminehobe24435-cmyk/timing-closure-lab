@@ -369,12 +369,13 @@ py -3.12 -m pytest tests -q        # 278 passed
 
 workflow 会在 Ubuntu 上**尽力** `apt-get install yosys iverilog nextpnr-ecp5`（`continue-on-error: true`），并且**实际装上了**。所以：
 
-| 环境 | 真实情况（实测） |
+| 环境 | 真实情况（实测 `gh run view`） |
 |---|---|
-| **Ubuntu-latest** | apt 装上的 `yosys`/`iverilog`/`nextpnr-ecp5` **确实可用**，因此**绝大多数 EDA 集成测试在 CI 上真跑并通过**：三个变体的 RTL 自检仿真、综合产网表、综合确定性、布局布线出报告并解析、流水提升 Fmax、以及**流水等价的形式化证明**。 |
-| **Ubuntu-latest 的缺口** | Ubuntu 归档里的 `nextpnr-ecp5` **版本较旧、没有 `--sdc` 选项**（报 `unrecognised option '--sdc'`），因此「SDC 真的被 nextpnr 读取」这一项在那里**跳过**并给出原因。 |
-| **Windows-latest** | runner 上没有任何 EDA 工具，10 项 EDA 集成测试全部**跳过**。 |
-| **两个平台都保证** | 268 项解析层与算法层测试**全部执行并通过**，使用仓库内提交的**真实工具输出**（`samples/`）作为固定输入。 |
+| **Ubuntu-latest** | **277 passed, 1 skipped（71 秒）**。apt 装上的 `yosys`/`iverilog`/`nextpnr-ecp5` **确实可用**，因此**绝大多数 EDA 集成测试在 CI 上真跑并通过**：三个变体的 RTL 自检仿真、综合产网表、综合确定性、布局布线出报告并解析、流水提升 Fmax、以及**流水等价的形式化证明**。 |
+| **Ubuntu-latest 的 1 项跳过** | Ubuntu 归档里的 `nextpnr-ecp5` **版本较旧、没有 `--sdc` 选项**（报 `unrecognised option '--sdc'`），所以 `test_place_and_route_reads_the_sdc_and_reports` 在那里**带原因跳过**。 |
+| **Windows-latest** | **268 passed, 10 skipped（1.1 秒）**。runner 上没有任何 EDA 工具，10 项 EDA 集成测试全部跳过。 |
+| **两个平台都保证** | **268 项**解析层与算法层测试**全部执行并通过**，使用仓库内提交的**真实工具输出**（`samples/`）作为固定输入。 |
+| **本机（含完整 OSS CAD Suite）** | **278 passed, 0 skipped**。 |
 
 为了应对这种版本差异，`tclab.flow` 会**探测** `nextpnr-ecp5` 是否支持 `--sdc`：支持则传入，不支持则**省略该参数并告警**（`require_sdc=True` 可改为硬失败）。让流程在旧版工具上直接崩掉不是好的工程做法，但把「约束没生效」这件事**静默吞掉**更糟——所以这里是显式告警。
 
