@@ -1,0 +1,117 @@
+name: CI
+
+# What CI actually verifies
+# -------------------------
+# The unit-test job exercises the layers that are pure Python: the SDC parser,
+# the nextpnr report reader, the STA arithmetic, the VCD toggle-rate extractor
+# and the relative power model, plus the orchestration and error paths. Those
+# run everywhere.
+#
+# The EDA-backed tests (real synthesis, place & route, iverilog simulations,
+# formal equivalence) are gated behind a runtime probe: `tests/conftest.py`
+# checks whether yosys / nextpnr-ecp5 / iverilog can actually be invoked and
+# skips them if not. The workflow below *attempts* to install the toolchain on
+# Ubuntu, but it is best-effort by design and the job does not depend on it.
+#
+# This is a deliberate, documented degradation, not a green light: the jobs
+# print exactly which tools were found and how many tests were skipped, so the
+# real coverage of a given run is visible in the log. Running the full flow
+# needs a local OSS CAD Suite (see README "Quick start").
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    name: unit tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest
+
+      # Best-effort toolchain install. A failure here must not fail the job:
+      # the parser/analysis suite is the guaranteed part of CI.
+      - name: Try to install EDA tools (Ubuntu, best effort)
+        if: runner.os == 'Linux'
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq || true
+          sudo apt-get install -y --no-install-recommends \
+            yosys iverilog nextpnr-ecp5 || true
+
+      - name: Report which EDA tools are available
+        continue-on-error: true
+        run: python -m tclab env
+
+      - name: Run unit tests
+        run: python -m pytest tests -v -ra
+
+      - name: Note the degradation when tools are missing
+        if: runner.os == 'Windows'
+        run: |
+          echo "Windows runners have no OSS CAD Suite, so EDA-backed tests are"
+          echo "expected to be skipped here. See README 'Tests and CI'."
+
+  # A syntax/lint gate that needs no toolchain at all.
+  static-checks:
+    name: static checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Byte-compile the package
+        run: python -m compileall -q tclab tests tools
+
+      - name: Check every source file is UTF-8 without a BOM
+        run: |
+          python - <<'PY'
+          import pathlib, sys
+          bad = []
+          exts = {".py", ".v", ".vh", ".ys", ".sdc", ".md", ".yml", ".toml", ".sh", ".bat"}
+          for p in pathlib.Path(".").rglob("*"):
+              if not p.is_file() or p.suffix not in exts:
+                  continue
+              if any(part in {".git", ".probe", "__pycache__", "sim_out"} for part in p.parts):
+                  continue
+              raw = p.read_bytes()
+              if raw.startswith(b"\xef\xbb\xbf"):
+                  bad.append(f"{p}: UTF-8 BOM")
+                  continue
+              try:
+                  raw.decode("utf-8")
+              except UnicodeDecodeError as exc:
+                  bad.append(f"{p}: not UTF-8 ({exc})")
+          if bad:
+              print("FAIL")
+              print("\n".join(bad))
+              sys.exit(1)
+          print("all sources are UTF-8 with no BOM")
+          PY
+
+      - name: Verify the shipped CLI responds
+        run: |
+          python -m tclab sdc constr/fir_block.sdc
+          python -m tclab sta samples/nextpnr_report_full.json
