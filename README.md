@@ -100,7 +100,7 @@ py -3.12 -m tclab sim                                # RTL 自检仿真
 ### 5. 跑测试
 
 ```bash
-py -3.12 -m pytest tests -q        # 266 passed
+py -3.12 -m pytest tests -q        # 275 passed
 ```
 
 ---
@@ -200,7 +200,7 @@ P_rel = Σ_net ( class_weight(net) × bit_toggle_rate(net) )
 
 ### 测试
 
-**266 passed**（`py -3.12 -m pytest tests -q`，约 54 秒）。其中 256 项不依赖 EDA 工具，10 项是真实跑综合/布局布线/仿真/形式验证的集成测试（无工具时自动跳过）。
+**275 passed**（`py -3.12 -m pytest tests -q`，约 52 秒）。其中 **265 项不依赖 EDA 工具**（CI 上保证执行），10 项是真实跑综合/布局布线/仿真/形式验证的集成测试（**无工具时自动跳过**）。
 
 ---
 
@@ -215,7 +215,7 @@ P_rel = Σ_net ( class_weight(net) × bit_toggle_rate(net) )
 | **逻辑等价（PV 相邻）** | yosys `equiv_make/equiv_simple/equiv_induct` + `miter` + `sat -prove-asserts`，证明流水化后**延迟若干拍输出一致** | 流水等价 **PROVEN**（`dout(t) == tree.dout(t−2)`，从复位起逐拍断言）；重结合全宽 CEC **33.6 分钟未收敛**，如实标注未证明 |
 | **低功耗（翻转率与功耗估算）** | `iverilog` dump VCD → 自研 VCD 解析器逐位统计翻转率 → 相对动态功耗模型；对比全速/占空比/静止三场景 | 占空比 1/4：**P_rel × 0.3695（−63.05%）**；静止：**× 0.0255**；其中**时钟功耗比值恒为 1.0000**，降的全是数据网络（0.3558） |
 | **TCL 脚本** | 实测确认 `yosys 0.66+181` **内建 TCL 8.6.12**（`-c`/`--tcl-scriptfile`），因此流程脚本用 TCL 写：`flow/*.ys` 与 LEC 脚本；SDC 本身就是 TCL 方言 | `-c file.tcl` 与 `yosys -import` 实测可用；`-p`/`-s` 脚本化流程脚本 6 个 |
-| **Python 分析** | 7 个模块：`sdc` / `report_parse` / `sta` / `power` / `lec` / `flow` / `runner` / `cli`，无第三方运行时依赖 | 解析器覆盖真实报告 367 条网络时序、6 条关键路径；**266 项 pytest**；一条命令跑完整流程 |
+| **Python 分析** | 7 个模块：`sdc` / `report_parse` / `sta` / `power` / `lec` / `flow` / `runner` / `cli`，无第三方运行时依赖 | 解析器覆盖真实报告 367 条网络时序、6 条关键路径；**275 项 pytest**；一条命令跑完整流程 |
 
 ---
 
@@ -228,7 +228,7 @@ P_rel = Σ_net ( class_weight(net) × bit_toggle_rate(net) )
 - **时序收敛实验**：3 种手段（重结合 / 流水 / 时序驱动布局开关）的对照，全部量化。
 - **逻辑等价检查**：流水等价形式化证明（PROVEN）+ 重结合的形式化尝试（未收敛，如实报告）+ 2160 次逐拍仿真比对。
 - **功耗**：VCD 翻转率提取 + 相对动态功耗模型 + 三场景对照。
-- **测试与 CI**：266 项 pytest；GitHub Actions（Ubuntu + Windows）。
+- **测试与 CI**：275 项 pytest；GitHub Actions（Ubuntu + Windows）。
 
 **没有做**：签核 STA、DRC/LVS、UPF/CPF、多物理角 PVT、真实工艺库、ASIC 综合、时钟树综合（CTS）、扫描链/DFT、真实芯片流片。
 
@@ -250,6 +250,7 @@ P_rel = Σ_net ( class_weight(net) × bit_toggle_rate(net) )
 10. **`set` 变量在解析时不可见**：原实现先解析完所有命令、再统一求值，于是 `set P 10` 之后的 `$P` 一律报"未定义变量"。修法：`set` 在解析阶段就地求值。
 11. **同名内部线被误判为等价**：`equiv_make` 按名字配对，gold 的组合 `n1` 与 gate 的**寄存后** `n1` 被当成一对，产生 518 个**永远证不出来**的 `$equiv` 义务。修法：改用 `miter`+`sat` 的有界证明表述流水等价，并在 `flow/lec_pipe_equiv.ys` 注释里写明这条路的坑。
 12. **`float("NaN")` 能解析成功**：时序报告里的 `"NaN"` 曾被原样读入，会向上污染所有 slack 计算。修法：`_as_float` 增加 `math.isfinite` 检查，非有限值退化为默认值。
+13. **把「命令找不到」当成了版本号，导致 CI 首次运行变红**：首次推送到 GitHub 后**两个单元测试 job 都失败**——挂的不是解析层，而是**工具可用性探测写错了**：探测函数只要工具"有输出"就判定可用，而工具不存在时 shell 会打印 `'iverilog' is not recognized as an internal or external command` 并返回非零，这条消息被当成了版本字符串，于是 EDA 集成测试**在没有任何工具链的 runner 上真的跑了起来并失败**，而不是被跳过。修法：改为按**输出内容**判断（`looks_like_missing_tool`），**不能只看返回码**——因为 `nextpnr-ecp5 --version` 正常时也是把版本横幅打到 stderr 并返回 1。已补回归测试并重新推送，之后 CI 转绿。
 
 ---
 
@@ -309,7 +310,7 @@ timing-closure-lab/
 │   ├── runner.py                 工具定位、调用、超时与进程树终止
 │   └── cli.py / __main__.py      命令行入口
 │
-├── tests/                        266 项 pytest
+├── tests/                        275 项 pytest
 │   ├── conftest.py               共享 fixture + EDA 可用性探测（自动跳过）
 │   ├── test_sdc.py               SDC 解析（含错误语法带行号）
 │   ├── test_report_parse.py      报告解析（含空报告 / 缺字段 / NaN）
@@ -317,7 +318,7 @@ timing-closure-lab/
 │   ├── test_power.py             翻转率统计与功耗模型
 │   ├── test_flow.py              编排、对照表算术、报告生成
 │   ├── test_runner.py            工具定位、路径重写、错误路径
-│   ├── test_regressions.py       12 类真实踩坑的回归测试
+│   ├── test_regressions.py       13 类真实踩坑的回归测试
 │   └── test_eda_integration.py   真实综合 / 布局布线 / 仿真 / 形式验证集成测试
 │
 ├── tools/
@@ -340,7 +341,7 @@ timing-closure-lab/
 ### 测试
 
 ```bash
-py -3.12 -m pytest tests -q        # 266 passed
+py -3.12 -m pytest tests -q        # 275 passed
 ```
 
 | 覆盖面 | 说明 |
@@ -354,7 +355,7 @@ py -3.12 -m pytest tests -q        # 266 passed
 | RTL 自检 | 用 `iverilog` 真跑三个变体的 testbench，各 720 次比对 |
 | 流程编排错误路径 | 工具缺失、非零退出、超时、LEC 四种结论分类、失败变体不参与对照 |
 
-**「注入已知问题 → 断言被抓出来」的测试**（`tests/test_regressions.py`，12 类，直接对应上文的真实踩坑）：测试平台竞态、空串成员判断导致的无限循环、`cmd.exe` 非 ASCII 路径、nextpnr SDC 子集边界、`sat` 初态未约束、进程树超时、monkeypatch 打错对象、UTF-8 BOM、VCD `$dumpvars` 丢失、`set` 求值时机、同名内部线误判等价、`NaN` 污染。
+**「注入已知问题 → 断言被抓出来」的测试**（`tests/test_regressions.py`，13 类，直接对应上文的真实踩坑）：测试平台竞态、空串成员判断导致的无限循环、`cmd.exe` 非 ASCII 路径、nextpnr SDC 子集边界、`sat` 初态未约束、进程树超时、monkeypatch 打错对象、UTF-8 BOM、VCD `$dumpvars` 丢失、`set` 求值时机、同名内部线误判等价、`NaN` 污染、把「命令找不到」当成版本号。
 
 ### CI
 
@@ -370,6 +371,8 @@ py -3.12 -m pytest tests -q        # 266 passed
 - 每个 job 都会先跑 `python -m tclab env` 打印**实际找到了哪些工具**，日志里能直接看出本次运行跳过多少。
 
 **完整流程必须本地装 OSS CAD Suite。CI 只验证解析与算法层**——这是有意的降级，不会用跳过伪装成绿灯。
+
+**CI 的真实历史**：第一次推送后 **CI 是红的**。原因不是降级策略，而是上面第 13 条——可用性探测把「命令找不到」的输出当成了版本号，导致 EDA 集成测试在无工具链的 runner 上真的执行并失败。修掉探测逻辑（改为按输出内容判断）并补了回归测试后重新推送，CI 转绿。这个失败被保留在记录里，而不是悄悄重跑掩盖掉。
 
 ---
 

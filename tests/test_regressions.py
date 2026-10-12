@@ -15,7 +15,7 @@ import pytest
 
 from tclab import flow as F
 from tclab import runner as R
-from tests.test_runner import _LAST_POPEN, _fake_popen
+from tests.test_runner import _FakePopen, _LAST_POPEN, _fake_popen
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -455,6 +455,83 @@ def test_whitespace_constants_are_sets_not_strings():
     assert isinstance(S._BARE_STOP, (set, frozenset))
     assert "" not in S._WS
     assert "" not in S._BARE_STOP
+
+
+# ---------------------------------------------------------------------------
+# 13. A "command not found" message is not a version banner
+# ---------------------------------------------------------------------------
+# SYMPTOM: CI came back RED. The EDA-backed integration tests *ran* on a runner
+#          with no OSS CAD Suite and failed, instead of being skipped.
+# CAUSE:   the availability probe accepted any output as a successful version
+#          probe. A missing binary makes the shell print
+#          "'iverilog' is not recognized as an internal or external command"
+#          and return non-zero -- the shell itself ran fine, so run_tool returned
+#          normally and that message was recorded as the version string.
+# FIX:     availability is decided by what the tool printed
+#          (looks_like_missing_tool), never by the exit code alone, because
+#          `nextpnr-ecp5 --version` legitimately prints its banner to stderr and
+#          exits 1.
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "'iverilog' is not recognized as an internal or external command,\noperable program or batch file.",
+        "/bin/sh: 1: yosys: command not found",
+        "cmd.exe: nextpnr-ecp5: No such file or directory",
+    ],
+)
+def test_missing_tool_messages_are_detected(text):
+    assert R.looks_like_missing_tool(text)
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Yosys 0.66+181 (git sha1 afe6b18f2, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)",
+        '"nextpnr-ecp5" -- Next Generation Place and Route (Version nextpnr-0.10-82-g2b560ad0)',
+        "Icarus Verilog version 14.0 (devel) (s20260301-227-g5a99d0e44-dirty)",
+    ],
+)
+def test_real_version_banners_are_not_flagged_as_missing(text):
+    assert not R.looks_like_missing_tool(text)
+
+
+def test_tools_available_is_false_when_the_shell_cannot_find_the_tool(monkeypatch):
+    """The exact situation on a CI runner without the toolchain."""
+
+    def factory(*args, **kwargs):
+        p = _FakePopen(*args, **kwargs)
+        p.returncode = 1
+        p._out = ""
+        p._err = (
+            "'yosys' is not recognized as an internal or external command,\n"
+            "operable program or batch file."
+        )
+        return p
+
+    monkeypatch.setattr(R.subprocess, "Popen", factory)
+    assert R.tools_available() is False
+    assert all("UNAVAILABLE" in v for v in R.tool_versions().values())
+
+
+def test_tools_available_is_true_for_a_tool_that_exits_nonzero_but_prints_a_banner(monkeypatch):
+    """nextpnr-ecp5 --version writes to stderr and exits 1, yet is available."""
+
+    def factory(*args, **kwargs):
+        p = _FakePopen(*args, **kwargs)
+        p.returncode = 1
+        p._out = ""
+        p._err = '"nextpnr-ecp5" -- Next Generation Place and Route (Version 0.10)'
+        return p
+
+    monkeypatch.setattr(R.subprocess, "Popen", factory)
+    assert R.tools_available() is True
+
+
+def test_tools_available_is_false_when_the_tool_produces_no_output(monkeypatch):
+    monkeypatch.setattr(R.subprocess, "Popen", _fake_popen(127, "", ""))
+    assert R.tools_available() is False
 
 
 # ---------------------------------------------------------------------------

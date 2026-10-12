@@ -30,13 +30,20 @@ REPORTS = ROOT / "reports"
 
 
 def _eda_available() -> bool:
-    """True when the flow's tools can actually be invoked."""
-    try:
-        from tclab.runner import ToolUnavailable, tool_versions
+    """True only when every EDA tool this lab needs actually runs.
 
-        v = tool_versions()
-        return not any("UNAVAILABLE" in s for s in v.values())
-    except Exception:
+    Delegates to ``tclab.runner.tools_available``, which decides availability by
+    what the tool printed rather than by its exit code. That distinction is
+    load-bearing: a missing binary makes the shell print "is not recognized as
+    an internal or external command" and return non-zero, and an earlier version
+    of this probe accepted that string as a version banner -- so the EDA tests
+    *ran* on a CI runner with no toolchain and failed instead of skipping.
+    """
+    try:
+        from tclab.runner import ToolUnavailable, tools_available
+
+        return tools_available()
+    except (ToolUnavailable, OSError, ImportError):
         return False
 
 

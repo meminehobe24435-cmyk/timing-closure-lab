@@ -38,6 +38,9 @@ __all__ = [
     "find_tool",
     "run_tool",
     "tool_versions",
+    "tools_available",
+    "probe_tool",
+    "looks_like_missing_tool",
     "ToolUnavailable",
 ]
 
@@ -371,19 +374,70 @@ def run_tool(
     return result
 
 
+#: Phrases a shell prints when it cannot find the executable. These reach us as
+#: ordinary *output* (the shell itself ran fine and returned non-zero), so a
+#: naive "did the command produce text?" availability probe mistakes them for a
+#: version banner.
+_MISSING_MARKERS = (
+    "is not recognized as an internal or external command",
+    "is not recognized as an internal or external",
+    "command not found",
+    "No such file or directory",
+    "cannot find the file",
+)
+
+#: The tools this lab drives, with the flag that makes each print its version.
+TOOL_PROBES: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("yosys", ("-V",)),
+    ("nextpnr-ecp5", ("--version",)),
+    ("iverilog", ("-V",)),
+)
+
+
+def looks_like_missing_tool(output: str) -> bool:
+    """True when *output* is a shell complaining that the tool does not exist."""
+    low = output.lower()
+    return any(m.lower() in low for m in _MISSING_MARKERS)
+
+
+def probe_tool(
+    tool: str,
+    args: Sequence[str] = (),
+    chain: Toolchain | None = None,
+    timeout: float = 60.0,
+) -> tuple[bool, str]:
+    """Return ``(available, version_line)`` for one tool.
+
+    Availability is decided by what the tool *said*, not by its exit code:
+    ``nextpnr-ecp5 --version`` legitimately prints its banner to stderr and
+    exits 1, while a missing binary makes the shell print a "not recognized"
+    message and also exits non-zero. Only the message distinguishes them.
+    """
+    try:
+        r = run_tool(tool, list(args), check=False, timeout=timeout, chain=chain)
+    except (ToolError, ToolUnavailable) as exc:
+        return False, f"UNAVAILABLE ({exc})"
+
+    text = (r.stdout + "\n" + r.stderr).strip()
+    if looks_like_missing_tool(text):
+        first = text.splitlines()[0].strip()
+        return False, f"UNAVAILABLE (not found: {first[:80]})"
+    if not text:
+        return False, f"UNAVAILABLE (no output, exit {r.returncode})"
+    return True, text.splitlines()[0].strip()
+
+
 def tool_versions(chain: Toolchain | None = None) -> dict[str, str]:
-    """Best-effort version strings for the tools this lab uses."""
-    out: dict[str, str] = {}
-    probes = [
-        ("yosys", ["-V"]),
-        ("nextpnr-ecp5", ["--version"]),
-        ("iverilog", ["-V"]),
-    ]
-    for tool, args in probes:
-        try:
-            r = run_tool(tool, args, check=False, timeout=60, chain=chain)
-            text = (r.stdout + " " + r.stderr).strip().splitlines()
-            out[tool] = text[0].strip() if text else f"exit {r.returncode}"
-        except (ToolError, ToolUnavailable) as exc:
-            out[tool] = f"UNAVAILABLE ({exc})"
-    return out
+    """Version string per tool, or an explicit ``UNAVAILABLE (...)`` marker."""
+    return {tool: probe_tool(tool, args, chain=chain)[1] for tool, args in TOOL_PROBES}
+
+
+def tools_available(chain: Toolchain | None = None) -> bool:
+    """True only when every tool this lab needs actually runs.
+
+    This is the gate the test suite uses to decide whether the EDA-backed
+    integration tests can run. Getting it wrong in the permissive direction
+    makes those tests *fail* on a machine without the toolchain instead of
+    skipping, which is exactly the false signal this project must not emit.
+    """
+    return all(probe_tool(tool, args, chain=chain)[0] for tool, args in TOOL_PROBES)
