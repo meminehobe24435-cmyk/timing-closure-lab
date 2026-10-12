@@ -1,0 +1,17 @@
+# Normalise line endings so the repository is identical on Windows and Linux.
+#
+# The important entry is *.bat: cmd.exe is happiest with CRLF-terminated batch
+# files, and `core.autocrlf=input` (used to keep the tree clean) would otherwise
+# commit tools/oss.bat with LF endings.
+
+* text=auto eol=lf
+
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.sh  text eol=lf
+
+# Binary-ish artefacts that must never be line-ending translated.
+*.vcd -text
+*.json -text
+*.png binary
+*.jpg binary
