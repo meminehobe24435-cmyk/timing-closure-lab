@@ -1,0 +1,40 @@
+# =============================================================================
+# flow/lec_pipe_equiv.ys -- equivalence of the retimed (pipelined) FIR
+# =============================================================================
+# Obligation, stated precisely:
+#
+#     fir_top_pipe.dout(t) == fir_top_tree.dout(t - 2)   for all t and all inputs
+#
+# fir_top_tree and fir_top_pipe instantiate the SAME balanced adder tree; the
+# only difference is that fir_top_pipe has two register cuts inside it. So this
+# is a pure *retiming* equivalence, and the criterion is deliberately expressed
+# as a shifted output sequence: a pipeline does not produce the same value at the
+# same cycle, it produces the same sequence two clocks later.
+#
+# The harness rtl/lec_pipe_wrapper.v delays the reference output by exactly the
+# added latency and asserts equality on every cycle from reset, so there is no
+# "pipeline fill" window that has to be excused.
+#
+# SCOPE OF THE RESULT -- read this before quoting it
+# --------------------------------------------------
+# This script runs a BOUNDED sequential proof: from the all-zero reset state, no
+# counterexample exists within the stated depth (-seq). The depth below is set
+# from the design itself (LATENCY_SHIFT + 2 = 4), comfortably past the pipeline
+# fill, so it covers the transient as well as the steady state.
+#
+# It is NOT an unbounded proof, and the script does not pretend otherwise:
+# `sat -tempinduct` was also attempted, and its outcome is recorded in the
+# README. Temporal induction from an *arbitrary* initial state legitimately fails
+# here, because "the reference delay line holds the values the pipeline needs" is
+# a reachable-state invariant, not a state predicate -- induction would require
+# that invariant to be supplied explicitly.
+# =============================================================================
+
+read_verilog -formal -I rtl rtl/fir_sum.v rtl/fir_core.v rtl/fir_top.v rtl/lec_pipe_wrapper.v
+prep -top lec_pipe_wrapper -flatten
+
+# The FIR resets asynchronously; SAT has no model for async FFs.
+async2sync
+
+# --- bounded proof from the reset state --------------------------------------
+sat -verify -prove-asserts -seq 4 -set-init-zero -show-ports

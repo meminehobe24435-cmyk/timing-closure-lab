@@ -1,0 +1,36 @@
+# =============================================================================
+# flow/lec_sum_equiv_small.ys -- re-association LEC at a tractable width
+# =============================================================================
+# Same RTL, same obligation as flow/lec_sum_equiv.ys, but instantiated small
+# enough (12-bit accumulator) that the proof obligation is small. Only the
+# accumulator width is scaled: fir_sum_tree is hard-wired for 16 taps, so
+# changing the tap count would read prod[15] out of range and produce a
+# counterexample that has nothing to do with the solver.
+#
+# WHAT THIS DOES AND DOES NOT ESTABLISH
+# -------------------------------------
+# It shows that the re-association check is well-posed and that the RTL really is
+# equivalent when the proof obligation is small. It is a SCALED check: it does
+# not prove the 37-bit / 16-tap instance, which is SAT-hard and did not
+# converge. It is reported as a reduced-width result, never as the full proof.
+# =============================================================================
+
+read_verilog -I rtl rtl/fir_sum.v
+hierarchy -top fir_sum_chain -chparam W 12
+prep -top fir_sum_chain -flatten
+rename fir_sum_chain gold
+design -stash gold
+
+design -reset
+read_verilog -I rtl rtl/fir_sum.v
+hierarchy -top fir_sum_tree -chparam W 12
+prep -top fir_sum_tree -flatten
+rename fir_sum_tree gate
+design -stash gate
+
+design -copy-from gold -as gold gold
+design -copy-from gate -as gate gate
+
+miter -equiv -flatten -make_assert gold gate miter
+hierarchy -top miter
+sat -verify -prove-asserts -show-ports

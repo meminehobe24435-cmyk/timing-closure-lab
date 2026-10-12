@@ -1,0 +1,42 @@
+# =============================================================================
+# flow/lec_sum_equiv.ys -- re-association LEC: serial chain vs balanced tree
+# =============================================================================
+# Obligation: for all input values,
+#
+#     fir_sum_chain(prod) == fir_sum_tree(prod)      (same value, same cycle)
+#
+# This is a purely combinational question -- no latency shift is involved, which
+# is exactly what distinguishes it from the retiming check.
+#
+# HONEST STATUS: this obligation is expected NOT to converge. Bit-level CNF-SAT
+# equivalence of two adder networks that differ in structure is a known hardness
+# result for resolution, and this build's minisat does not close it at 37-bit /
+# 16-tap width (measured: >10 minutes with no result). The command below is left
+# intact and is run by `tclab lec`, which reports the measured outcome (timeout /
+# unproven) rather than pretending the proof succeeded.
+#
+# See flow/lec_sum_equiv_small.ys for the same RTL at a width where it does
+# close, and sim/tb_fir.v for the full-width functional check.
+# =============================================================================
+
+read_verilog -I rtl rtl/fir_sum.v
+prep -top fir_sum_chain -flatten
+rename fir_sum_chain gold
+design -stash gold
+
+design -reset
+read_verilog -I rtl rtl/fir_sum.v
+prep -top fir_sum_tree -flatten
+rename fir_sum_tree gate
+design -stash gate
+
+design -copy-from gold -as gold gold
+design -copy-from gate -as gate gate
+
+# The multiplier array lives outside both modules and is identical RTL in every
+# variant, so its outputs (prod_flat) act as legitimate cut points. Having both
+# modules expose prod_flat as an input port is what makes this a well-posed
+# equivalence question rather than a whole-design multiplier proof.
+miter -equiv -flatten -make_assert gold gate miter
+hierarchy -top miter
+sat -verify -prove-asserts -show-ports
