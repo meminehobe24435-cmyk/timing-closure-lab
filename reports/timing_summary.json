@@ -1,0 +1,2175 @@
+{
+  "variants": [
+    {
+      "variant": {
+        "name": "baseline",
+        "sum_style": 0,
+        "pipe_stages": 0,
+        "freq_mhz": 100.0,
+        "no_tmdriv": false,
+        "seed": 1,
+        "description": "serial accumulation chain (15 adders in series), timing-critical baseline",
+        "latency": 1
+      },
+      "ok": true,
+      "error": "",
+      "paths": {
+        "json": "reports\\baseline.json",
+        "report": "reports\\baseline_report.json",
+        "log": "reports\\baseline.log"
+      },
+      "metrics": {
+        "variant": "baseline",
+        "sum_style": 0,
+        "pipe_stages": 0,
+        "latency_clocks": 1,
+        "freq_constraint_mhz": 100.0,
+        "timing_driven_placement": true,
+        "ok": true,
+        "lut4": 1132,
+        "ff": 331,
+        "bram": 0,
+        "dsp": 16,
+        "io": 93,
+        "fmax_mhz": 50.970996817805386,
+        "worst_path_ns": 19.619000263512135,
+        "setup_slack_ns": -9.619000263512135,
+        "timing_met": false,
+        "critical_path_start": "u_core.sr[6]",
+        "critical_path_end": "u_core.dout",
+        "critical_path_steps": 77,
+        "logic_ns": 7.825000114738941,
+        "routing_ns": 11.269000172615051,
+        "clk_to_q_ns": 0.5249999761581421
+      },
+      "sta": {
+        "clocks": [
+          {
+            "clock": "$glbnet$clk$TRELLIS_IO_IN",
+            "constraint_mhz": 100.0,
+            "achieved_mhz": 50.970996817805386,
+            "worst_path_ns": 19.619000263512135,
+            "constraint_period_ns": 10.0,
+            "achieved_period_ns": 19.619000263512135,
+            "setup_slack_ns": -9.619000263512135,
+            "met": false
+          }
+        ],
+        "critical_path": {
+          "from_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+          "to_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+          "start_point": "u_core.sr[6]",
+          "end_point": "u_core.dout",
+          "total_ns": 19.619000263512135,
+          "implied_fmax_mhz": 50.970996817805386,
+          "steps": 77,
+          "by_type": {
+            "logic_ns": 7.825000114738941,
+            "routing_ns": 11.269000172615051,
+            "clk_to_q_ns": 0.5249999761581421,
+            "setup_ns": 0.0,
+            "source_ns": 0.0
+          },
+          "breakdown_ns": {
+            "clk-to-q": 0.5249999761581421,
+            "routing": 11.269000172615051,
+            "logic": 7.825000114738941,
+            "setup": 0.0
+          },
+          "culprit_nets": [
+            {
+              "net": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z[3]",
+              "delay_ns": 2.252000093460083
+            },
+            {
+              "net": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z_L6MUX21_SD_1_Z[4]",
+              "delay_ns": 1.9500000476837158
+            },
+            {
+              "net": "u_core.prod[6][2]",
+              "delay_ns": 1.4819999933242798
+            },
+            {
+              "net": "u_core.sr[6][15]",
+              "delay_ns": 1.305999994277954
+            },
+            {
+              "net": "u_core.sum_pre_CCU2C_S1_14_A1",
+              "delay_ns": 1.1610000133514404
+            },
+            {
+              "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_Z_D_LUT4_D_Z[3]",
+              "delay_ns": 0.9900000095367432
+            },
+            {
+              "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_D_Z[3]",
+              "delay_ns": 0.7160000205039978
+            },
+            {
+              "net": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0[3]",
+              "delay_ns": 0.7070000171661377
+            },
+            {
+              "net": "u_core.sum_pre[31]",
+              "delay_ns": 0.7049999833106995
+            },
+            {
+              "net": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1_L6MUX21_Z_D1",
+              "delay_ns": 0.0
+            }
+          ]
+        },
+        "bottlenecks_by_endpoint": [
+          {
+            "name": "u_core.dout",
+            "worst_arrival_ns": 19.618999481201172,
+            "count": 74
+          },
+          {
+            "name": "u_core.sr[2]",
+            "worst_arrival_ns": 7.515999794006348,
+            "count": 32
+          },
+          {
+            "name": "u_core.sr[3]",
+            "worst_arrival_ns": 7.515999794006348,
+            "count": 32
+          },
+          {
+            "name": "dout_slow",
+            "worst_arrival_ns": 6.994999885559082,
+            "count": 74
+          },
+          {
+            "name": "u_core.sr[0]",
+            "worst_arrival_ns": 6.984000205993652,
+            "count": 32
+          },
+          {
+            "name": "u_core.sr[1]",
+            "worst_arrival_ns": 6.984000205993652,
+            "count": 32
+          },
+          {
+            "name": "u_core.sr[4]",
+            "worst_arrival_ns": 5.723999977111816,
+            "count": 32
+          },
+          {
+            "name": "dout[31]",
+            "worst_arrival_ns": 5.535999774932861,
+            "count": 1
+          },
+          {
+            "name": "u_core.sr[6]",
+            "worst_arrival_ns": 5.510000228881836,
+            "count": 32
+          },
+          {
+            "name": "u_core.sr[5]",
+            "worst_arrival_ns": 5.504000186920166,
+            "count": 32
+          }
+        ],
+        "bottlenecks_by_start": [
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 19.618999481201172,
+            "count": 6
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 19.01300048828125,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 18.972999572753906,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 18.941999435424805,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 18.871000289916992,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 18.83099937438965,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 18.812000274658203,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 18.799999237060547,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 18.760000228881836,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 18.729000091552734,
+            "count": 1
+          }
+        ],
+        "nets_by_delay": [
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 19.618999481201172,
+            "count": 37
+          },
+          {
+            "name": "rst_n",
+            "worst_arrival_ns": 7.515999794006348,
+            "count": 331
+          },
+          {
+            "name": "u_core.dout",
+            "worst_arrival_ns": 5.535999774932861,
+            "count": 74
+          },
+          {
+            "name": "dout_slow",
+            "worst_arrival_ns": 4.543000221252441,
+            "count": 37
+          },
+          {
+            "name": "u_core.sr[0]",
+            "worst_arrival_ns": 3.9539999961853027,
+            "count": 16
+          },
+          {
+            "name": "u_core.sr[3]",
+            "worst_arrival_ns": 3.049999952316284,
+            "count": 16
+          },
+          {
+            "name": "din[13]",
+            "worst_arrival_ns": 2.875999927520752,
+            "count": 1
+          },
+          {
+            "name": "u_core.sr[11]",
+            "worst_arrival_ns": 2.7079999446868896,
+            "count": 16
+          },
+          {
+            "name": "din[15]",
+            "worst_arrival_ns": 2.558000087738037,
+            "count": 1
+          },
+          {
+            "name": "din[0]",
+            "worst_arrival_ns": 2.558000087738037,
+            "count": 1
+          }
+        ],
+        "delay_split_ns": {
+          "logic_ns": 7.825000114738941,
+          "routing_ns": 11.269000172615051,
+          "clk_to_q_ns": 0.5249999761581421,
+          "setup_ns": 0.0,
+          "source_ns": 0.0
+        },
+        "hold_analysed": false,
+        "hold_note": "nextpnr's ECP5 flow performs max-delay (setup) analysis only; it reports no hold requirement, so no hold slack is claimed here. Min-delay arrival values are available in the raw report for inspection.",
+        "conclusions": [
+          "$glbnet$clk$TRELLIS_IO_IN: VIOLATED - worst path 19.619 ns needs 10.000 ns, so setup slack is -9.619 ns at 100.000 MHz (achievable 50.971 MHz).",
+          "Critical path u_core.sr[6] -> u_core.dout is 19.619 ns over 77 steps: 7.825 ns logic (39.9%), 11.269 ns routing (57.4%), 0.525 ns clk-to-q.",
+          "Routing dominates the critical path, so this is a placement/congestion problem as much as a logic-depth problem.",
+          "Worst net by arrival is u_core.sum_pre at 19.619 ns (6 sink(s)); the slowest nets are the ones to shorten first.",
+          "Worst capture point is u_core.dout at 19.619 ns over 74 timed pin(s)."
+        ],
+        "utilization": {
+          "lut4": 1132,
+          "ff": 331,
+          "bram": 0,
+          "dsp": 16,
+          "io": 93,
+          "lut4_available": 43848,
+          "ff_available": 43848,
+          "cells_nonzero": {
+            "DCCA": 2,
+            "MULT18X18D": 16,
+            "TRELLIS_COMB": 1132,
+            "TRELLIS_FF": 331,
+            "TRELLIS_IO": 93
+          }
+        },
+        "worst_achieved_mhz": 50.970996817805386,
+        "timing_met": false
+      }
+    },
+    {
+      "variant": {
+        "name": "tree",
+        "sum_style": 1,
+        "pipe_stages": 0,
+        "freq_mhz": 100.0,
+        "no_tmdriv": false,
+        "seed": 1,
+        "description": "balanced adder tree, zero added latency (re-association only)",
+        "latency": 1
+      },
+      "ok": true,
+      "error": "",
+      "paths": {
+        "json": "reports\\tree.json",
+        "report": "reports\\tree_report.json",
+        "log": "reports\\tree.log"
+      },
+      "metrics": {
+        "variant": "tree",
+        "sum_style": 1,
+        "pipe_stages": 0,
+        "latency_clocks": 1,
+        "freq_constraint_mhz": 100.0,
+        "timing_driven_placement": true,
+        "ok": true,
+        "lut4": 1136,
+        "ff": 331,
+        "bram": 0,
+        "dsp": 16,
+        "io": 93,
+        "fmax_mhz": 49.80079650878906,
+        "worst_path_ns": 20.080000122558594,
+        "setup_slack_ns": -10.080000122558594,
+        "timing_met": false,
+        "critical_path_start": "u_core.sr[1]",
+        "critical_path_end": "u_core.dout",
+        "critical_path_steps": 75,
+        "logic_ns": 7.9900001138448715,
+        "routing_ns": 11.564999856054783,
+        "clk_to_q_ns": 0.5249999761581421
+      },
+      "sta": {
+        "clocks": [
+          {
+            "clock": "$glbnet$clk$TRELLIS_IO_IN",
+            "constraint_mhz": 100.0,
+            "achieved_mhz": 49.80079650878906,
+            "worst_path_ns": 20.080000122558594,
+            "constraint_period_ns": 10.0,
+            "achieved_period_ns": 20.080000122558594,
+            "setup_slack_ns": -10.080000122558594,
+            "met": false
+          }
+        ],
+        "critical_path": {
+          "from_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+          "to_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+          "start_point": "u_core.sr[1]",
+          "end_point": "u_core.dout",
+          "total_ns": 20.079999946057796,
+          "implied_fmax_mhz": 49.80079694653211,
+          "steps": 75,
+          "by_type": {
+            "logic_ns": 7.9900001138448715,
+            "routing_ns": 11.564999856054783,
+            "clk_to_q_ns": 0.5249999761581421,
+            "setup_ns": 0.0,
+            "source_ns": 0.0
+          },
+          "breakdown_ns": {
+            "clk-to-q": 0.5249999761581421,
+            "routing": 11.564999856054783,
+            "logic": 7.9900001138448715,
+            "setup": 0.0
+          },
+          "culprit_nets": [
+            {
+              "net": "u_core.prod[1][4]",
+              "delay_ns": 2.3429999351501465
+            },
+            {
+              "net": "u_core.sum_pre[31]",
+              "delay_ns": 2.2119998931884766
+            },
+            {
+              "net": "u_core.sr[1][11]",
+              "delay_ns": 1.5470000505447388
+            },
+            {
+              "net": "u_core.sum_pre_CCU2C_S1_10_A1",
+              "delay_ns": 1.472000002861023
+            },
+            {
+              "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_D_1_Z_PFUMX_Z_1_C0_LUT4_Z_D_PFUMX_C0_Z[4]",
+              "delay_ns": 0.9459999799728394
+            },
+            {
+              "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_D_Z[4]",
+              "delay_ns": 0.9089999794960022
+            },
+            {
+              "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_D_1_Z[1]",
+              "delay_ns": 0.9010000228881836
+            },
+            {
+              "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_D_1_Z_PFUMX_Z_1_C0_LUT4_Z_D_PFUMX_C0_Z_PFUMX_C0_1_Z[4]",
+              "delay_ns": 0.7559999823570251
+            },
+            {
+              "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_D_1_Z_PFUMX_Z_1_C0[3]",
+              "delay_ns": 0.4390000104904175
+            },
+            {
+              "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_D_1_Z_PFUMX_Z_1_C0_LUT4_Z_D[4]",
+              "delay_ns": 0.03999999910593033
+            }
+          ]
+        },
+        "bottlenecks_by_endpoint": [
+          {
+            "name": "u_core.dout",
+            "worst_arrival_ns": 20.079999923706055,
+            "count": 74
+          },
+          {
+            "name": "dout_slow",
+            "worst_arrival_ns": 7.013000011444092,
+            "count": 74
+          },
+          {
+            "name": "u_core.sr[1]",
+            "worst_arrival_ns": 6.48799991607666,
+            "count": 32
+          },
+          {
+            "name": "u_core.sr[0]",
+            "worst_arrival_ns": 6.335000038146973,
+            "count": 32
+          },
+          {
+            "name": "u_core.sr[2]",
+            "worst_arrival_ns": 6.091000080108643,
+            "count": 32
+          },
+          {
+            "name": "u_core.sr[3]",
+            "worst_arrival_ns": 6.045000076293945,
+            "count": 32
+          },
+          {
+            "name": "u_core.sr[4]",
+            "worst_arrival_ns": 6.01800012588501,
+            "count": 32
+          },
+          {
+            "name": "u_div.clk_div2_q",
+            "worst_arrival_ns": 5.638000011444092,
+            "count": 2
+          },
+          {
+            "name": "u_core.sr[5]",
+            "worst_arrival_ns": 5.4670000076293945,
+            "count": 32
+          },
+          {
+            "name": "u_core.sr[6]",
+            "worst_arrival_ns": 5.466000080108643,
+            "count": 32
+          }
+        ],
+        "bottlenecks_by_start": [
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 20.079999923706055,
+            "count": 6
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 17.966999053955078,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 17.927000045776367,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 17.895999908447266,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 17.825000762939453,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 17.78499984741211,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 17.766000747680664,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 17.753999710083008,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 17.714000701904297,
+            "count": 1
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 17.683000564575195,
+            "count": 1
+          }
+        ],
+        "nets_by_delay": [
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 20.079999923706055,
+            "count": 37
+          },
+          {
+            "name": "rst_n",
+            "worst_arrival_ns": 7.013000011444092,
+            "count": 331
+          },
+          {
+            "name": "u_core.dout",
+            "worst_arrival_ns": 5.189000129699707,
+            "count": 74
+          },
+          {
+            "name": "din[0]",
+            "worst_arrival_ns": 4.306000232696533,
+            "count": 1
+          },
+          {
+            "name": "dout_slow",
+            "worst_arrival_ns": 3.9210000038146973,
+            "count": 37
+          },
+          {
+            "name": "din[1]",
+            "worst_arrival_ns": 3.8940000534057617,
+            "count": 1
+          },
+          {
+            "name": "din[13]",
+            "worst_arrival_ns": 3.625999927520752,
+            "count": 1
+          },
+          {
+            "name": "din[10]",
+            "worst_arrival_ns": 3.388000011444092,
+            "count": 1
+          },
+          {
+            "name": "din[15]",
+            "worst_arrival_ns": 3.257999897003174,
+            "count": 1
+          },
+          {
+            "name": "din[11]",
+            "worst_arrival_ns": 2.7780001163482666,
+            "count": 1
+          }
+        ],
+        "delay_split_ns": {
+          "logic_ns": 7.9900001138448715,
+          "routing_ns": 11.564999856054783,
+          "clk_to_q_ns": 0.5249999761581421,
+          "setup_ns": 0.0,
+          "source_ns": 0.0
+        },
+        "hold_analysed": false,
+        "hold_note": "nextpnr's ECP5 flow performs max-delay (setup) analysis only; it reports no hold requirement, so no hold slack is claimed here. Min-delay arrival values are available in the raw report for inspection.",
+        "conclusions": [
+          "$glbnet$clk$TRELLIS_IO_IN: VIOLATED - worst path 20.080 ns needs 10.000 ns, so setup slack is -10.080 ns at 100.000 MHz (achievable 49.801 MHz).",
+          "Critical path u_core.sr[1] -> u_core.dout is 20.080 ns over 75 steps: 7.990 ns logic (39.8%), 11.565 ns routing (57.6%), 0.525 ns clk-to-q.",
+          "Routing dominates the critical path, so this is a placement/congestion problem as much as a logic-depth problem.",
+          "Worst net by arrival is u_core.sum_pre at 20.080 ns (6 sink(s)); the slowest nets are the ones to shorten first.",
+          "Worst capture point is u_core.dout at 20.080 ns over 74 timed pin(s)."
+        ],
+        "utilization": {
+          "lut4": 1136,
+          "ff": 331,
+          "bram": 0,
+          "dsp": 16,
+          "io": 93,
+          "lut4_available": 43848,
+          "ff_available": 43848,
+          "cells_nonzero": {
+            "DCCA": 2,
+            "MULT18X18D": 16,
+            "TRELLIS_COMB": 1136,
+            "TRELLIS_FF": 331,
+            "TRELLIS_IO": 93
+          }
+        },
+        "worst_achieved_mhz": 49.80079650878906,
+        "timing_met": false
+      }
+    },
+    {
+      "variant": {
+        "name": "tree_pipe1",
+        "sum_style": 1,
+        "pipe_stages": 1,
+        "freq_mhz": 100.0,
+        "no_tmdriv": false,
+        "seed": 1,
+        "description": "adder tree with one register cut (+1 clock)",
+        "latency": 2
+      },
+      "ok": true,
+      "error": "",
+      "paths": {
+        "json": "reports\\tree_pipe1.json",
+        "report": "reports\\tree_pipe1_report.json",
+        "log": "reports\\tree_pipe1.log"
+      },
+      "metrics": {
+        "variant": "tree_pipe1",
+        "sum_style": 1,
+        "pipe_stages": 1,
+        "latency_clocks": 2,
+        "freq_constraint_mhz": 100.0,
+        "timing_driven_placement": true,
+        "ok": true,
+        "lut4": 826,
+        "ff": 627,
+        "bram": 0,
+        "dsp": 16,
+        "io": 93,
+        "fmax_mhz": 88.32361839890818,
+        "worst_path_ns": 11.321999914944172,
+        "setup_slack_ns": -1.321999914944172,
+        "timing_met": false,
+        "critical_path_start": "u_core.sr[3]",
+        "critical_path_end": "u_core.sum_pre",
+        "critical_path_steps": 53,
+        "logic_ns": 5.598000057041645,
+        "routing_ns": 5.198999881744385,
+        "clk_to_q_ns": 0.5249999761581421
+      },
+      "sta": {
+        "clocks": [
+          {
+            "clock": "$glbnet$clk$TRELLIS_IO_IN",
+            "constraint_mhz": 100.0,
+            "achieved_mhz": 88.32361839890818,
+            "worst_path_ns": 11.321999914944172,
+            "constraint_period_ns": 10.0,
+            "achieved_period_ns": 11.321999914944174,
+            "setup_slack_ns": -1.321999914944172,
+            "met": false
+          }
+        ],
+        "critical_path": {
+          "from_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+          "to_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+          "start_point": "u_core.sr[3]",
+          "end_point": "u_core.sum_pre",
+          "total_ns": 11.321999914944172,
+          "implied_fmax_mhz": 88.32361839890818,
+          "steps": 53,
+          "by_type": {
+            "logic_ns": 5.598000057041645,
+            "routing_ns": 5.198999881744385,
+            "clk_to_q_ns": 0.5249999761581421,
+            "setup_ns": 0.0,
+            "source_ns": 0.0
+          },
+          "breakdown_ns": {
+            "clk-to-q": 0.5249999761581421,
+            "routing": 5.198999881744385,
+            "logic": 5.598000057041645,
+            "setup": 0.0
+          },
+          "culprit_nets": [
+            {
+              "net": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_C_LUT4_D_Z_TRELLIS_FF_Q_2_DI[24]",
+              "delay_ns": 2.0169999599456787
+            },
+            {
+              "net": "u_core.prod[3][2]",
+              "delay_ns": 1.7949999570846558
+            },
+            {
+              "net": "u_core.sr[3][12]",
+              "delay_ns": 1.3869999647140503
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[3]_CCU2C_B1_COUT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[3]_CCU2C_B1_1$CCU2_FCI_INT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[3]_CCU2C_B1_1_COUT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[3]_CCU2C_B1_2$CCU2_FCI_INT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[3]_CCU2C_B1_2_COUT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[3]_CCU2C_B1_3$CCU2_FCI_INT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[3]_CCU2C_B1_3_COUT",
+              "delay_ns": 0.0
+            }
+          ]
+        },
+        "bottlenecks_by_endpoint": [
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 11.321999549865723,
+            "count": 592
+          },
+          {
+            "name": "u_core.dout",
+            "worst_arrival_ns": 9.782999992370605,
+            "count": 74
+          },
+          {
+            "name": "dout[34]",
+            "worst_arrival_ns": 6.78000020980835,
+            "count": 1
+          },
+          {
+            "name": "dout[2]",
+            "worst_arrival_ns": 6.745999813079834,
+            "count": 1
+          },
+          {
+            "name": "dout[23]",
+            "worst_arrival_ns": 6.460999965667725,
+            "count": 1
+          },
+          {
+            "name": "dout[1]",
+            "worst_arrival_ns": 6.044000148773193,
+            "count": 1
+          },
+          {
+            "name": "u_core.sr[3]",
+            "worst_arrival_ns": 5.895999908447266,
+            "count": 32
+          },
+          {
+            "name": "dout_slow",
+            "worst_arrival_ns": 5.828999996185303,
+            "count": 74
+          },
+          {
+            "name": "u_core.sr[0]",
+            "worst_arrival_ns": 5.52400016784668,
+            "count": 32
+          },
+          {
+            "name": "u_core.sr[1]",
+            "worst_arrival_ns": 5.308000087738037,
+            "count": 32
+          }
+        ],
+        "bottlenecks_by_start": [
+          {
+            "name": "u_core.g_tree.u_sum.prod[3]",
+            "worst_arrival_ns": 11.321999549865723,
+            "count": 12
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[12]",
+            "worst_arrival_ns": 10.710000038146973,
+            "count": 12
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[15]",
+            "worst_arrival_ns": 10.678000450134277,
+            "count": 14
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[1]",
+            "worst_arrival_ns": 10.63599967956543,
+            "count": 14
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[10]",
+            "worst_arrival_ns": 10.621999740600586,
+            "count": 10
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 10.512999534606934,
+            "count": 7
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[9]",
+            "worst_arrival_ns": 10.437000274658203,
+            "count": 7
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[5]",
+            "worst_arrival_ns": 10.246000289916992,
+            "count": 10
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[1]",
+            "worst_arrival_ns": 10.003999710083008,
+            "count": 1
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[1]",
+            "worst_arrival_ns": 9.96399974822998,
+            "count": 1
+          }
+        ],
+        "nets_by_delay": [
+          {
+            "name": "u_core.g_tree.u_sum.prod[3]",
+            "worst_arrival_ns": 11.321999549865723,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[12]",
+            "worst_arrival_ns": 10.710000038146973,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[15]",
+            "worst_arrival_ns": 10.678000450134277,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[1]",
+            "worst_arrival_ns": 10.63599967956543,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[10]",
+            "worst_arrival_ns": 10.621999740600586,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 10.512999534606934,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[9]",
+            "worst_arrival_ns": 10.437000274658203,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[5]",
+            "worst_arrival_ns": 10.246000289916992,
+            "count": 37
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 9.782999992370605,
+            "count": 37
+          },
+          {
+            "name": "u_core.dout",
+            "worst_arrival_ns": 6.78000020980835,
+            "count": 74
+          }
+        ],
+        "delay_split_ns": {
+          "logic_ns": 5.598000057041645,
+          "routing_ns": 5.198999881744385,
+          "clk_to_q_ns": 0.5249999761581421,
+          "setup_ns": 0.0,
+          "source_ns": 0.0
+        },
+        "hold_analysed": false,
+        "hold_note": "nextpnr's ECP5 flow performs max-delay (setup) analysis only; it reports no hold requirement, so no hold slack is claimed here. Min-delay arrival values are available in the raw report for inspection.",
+        "conclusions": [
+          "$glbnet$clk$TRELLIS_IO_IN: VIOLATED - worst path 11.322 ns needs 10.000 ns, so setup slack is -1.322 ns at 100.000 MHz (achievable 88.324 MHz).",
+          "Critical path u_core.sr[3] -> u_core.sum_pre is 11.322 ns over 53 steps: 5.598 ns logic (49.4%), 5.199 ns routing (45.9%), 0.525 ns clk-to-q.",
+          "Logic delay dominates the critical path, so shortening the combinational depth is the lever that matters.",
+          "Worst net by arrival is u_core.g_tree.u_sum.prod[3] at 11.322 ns (12 sink(s)); the slowest nets are the ones to shorten first.",
+          "Worst capture point is u_core.sum_pre at 11.322 ns over 592 timed pin(s)."
+        ],
+        "utilization": {
+          "lut4": 826,
+          "ff": 627,
+          "bram": 0,
+          "dsp": 16,
+          "io": 93,
+          "lut4_available": 43848,
+          "ff_available": 43848,
+          "cells_nonzero": {
+            "DCCA": 2,
+            "MULT18X18D": 16,
+            "TRELLIS_COMB": 826,
+            "TRELLIS_FF": 627,
+            "TRELLIS_IO": 93
+          }
+        },
+        "worst_achieved_mhz": 88.32361839890818,
+        "timing_met": false
+      }
+    },
+    {
+      "variant": {
+        "name": "pipe",
+        "sum_style": 1,
+        "pipe_stages": 2,
+        "freq_mhz": 100.0,
+        "no_tmdriv": false,
+        "seed": 1,
+        "description": "adder tree with two register cuts (+2 clocks)",
+        "latency": 3
+      },
+      "ok": true,
+      "error": "",
+      "paths": {
+        "json": "reports\\pipe.json",
+        "report": "reports\\pipe_report.json",
+        "log": "reports\\pipe.log"
+      },
+      "metrics": {
+        "variant": "pipe",
+        "sum_style": 1,
+        "pipe_stages": 2,
+        "latency_clocks": 3,
+        "freq_constraint_mhz": 100.0,
+        "timing_driven_placement": true,
+        "ok": true,
+        "lut4": 641,
+        "ff": 775,
+        "bram": 0,
+        "dsp": 16,
+        "io": 93,
+        "fmax_mhz": 94.6073795062975,
+        "worst_path_ns": 10.569999985396862,
+        "setup_slack_ns": -0.569999985396862,
+        "timing_met": false,
+        "critical_path_start": "u_core.sr[8]",
+        "critical_path_end": "u_core.sum_pre",
+        "critical_path_steps": 63,
+        "logic_ns": 5.740000061690807,
+        "routing_ns": 4.304999947547913,
+        "clk_to_q_ns": 0.5249999761581421
+      },
+      "sta": {
+        "clocks": [
+          {
+            "clock": "$glbnet$clk$TRELLIS_IO_IN",
+            "constraint_mhz": 100.0,
+            "achieved_mhz": 94.6073795062975,
+            "worst_path_ns": 10.569999985396862,
+            "constraint_period_ns": 10.0,
+            "achieved_period_ns": 10.569999985396862,
+            "setup_slack_ns": -0.569999985396862,
+            "met": false
+          }
+        ],
+        "critical_path": {
+          "from_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+          "to_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+          "start_point": "u_core.sr[8]",
+          "end_point": "u_core.sum_pre",
+          "total_ns": 10.569999985396862,
+          "implied_fmax_mhz": 94.6073795062975,
+          "steps": 63,
+          "by_type": {
+            "logic_ns": 5.740000061690807,
+            "routing_ns": 4.304999947547913,
+            "clk_to_q_ns": 0.5249999761581421,
+            "setup_ns": 0.0,
+            "source_ns": 0.0
+          },
+          "breakdown_ns": {
+            "clk-to-q": 0.5249999761581421,
+            "routing": 4.304999947547913,
+            "logic": 5.740000061690807,
+            "setup": 0.0
+          },
+          "culprit_nets": [
+            {
+              "net": "u_core.prod[8][2]",
+              "delay_ns": 2.11899995803833
+            },
+            {
+              "net": "u_core.sr[8][8]",
+              "delay_ns": 1.2619999647140503
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_S1[30]",
+              "delay_ns": 0.9240000247955322
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_2$CCU2_FCI_INT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_2_COUT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_15$CCU2_FCI_INT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_15_COUT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_1$CCU2_FCI_INT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_1_COUT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1$CCU2_FCI_INT",
+              "delay_ns": 0.0
+            }
+          ]
+        },
+        "bottlenecks_by_endpoint": [
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 10.569999694824219,
+            "count": 588
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[12]",
+            "worst_arrival_ns": 10.145000457763672,
+            "count": 150
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[3]",
+            "worst_arrival_ns": 10.057000160217285,
+            "count": 150
+          },
+          {
+            "name": "u_core.dout",
+            "worst_arrival_ns": 6.692999839782715,
+            "count": 74
+          },
+          {
+            "name": "dout[16]",
+            "worst_arrival_ns": 6.238999843597412,
+            "count": 1
+          },
+          {
+            "name": "dout_slow",
+            "worst_arrival_ns": 6.139999866485596,
+            "count": 74
+          },
+          {
+            "name": "u_core.sr[14]",
+            "worst_arrival_ns": 5.922999858856201,
+            "count": 32
+          },
+          {
+            "name": "dout[9]",
+            "worst_arrival_ns": 5.479000091552734,
+            "count": 1
+          },
+          {
+            "name": "u_core.sr[15]",
+            "worst_arrival_ns": 5.449999809265137,
+            "count": 32
+          },
+          {
+            "name": "dout_slow[6]",
+            "worst_arrival_ns": 5.072000026702881,
+            "count": 1
+          }
+        ],
+        "bottlenecks_by_start": [
+          {
+            "name": "u_core.g_tree.u_sum.prod[9]",
+            "worst_arrival_ns": 10.569999694824219,
+            "count": 7
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 10.26099967956543,
+            "count": 7
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[12]",
+            "worst_arrival_ns": 10.145000457763672,
+            "count": 12
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[10]",
+            "worst_arrival_ns": 10.142000198364258,
+            "count": 10
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[15]",
+            "worst_arrival_ns": 10.074999809265137,
+            "count": 14
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[3]",
+            "worst_arrival_ns": 10.057000160217285,
+            "count": 12
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[1]",
+            "worst_arrival_ns": 9.9350004196167,
+            "count": 14
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[5]",
+            "worst_arrival_ns": 9.87600040435791,
+            "count": 10
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[10]",
+            "worst_arrival_ns": 9.817999839782715,
+            "count": 1
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[10]",
+            "worst_arrival_ns": 9.777999877929688,
+            "count": 1
+          }
+        ],
+        "nets_by_delay": [
+          {
+            "name": "u_core.g_tree.u_sum.prod[9]",
+            "worst_arrival_ns": 10.569999694824219,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 10.26099967956543,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[12]",
+            "worst_arrival_ns": 10.145000457763672,
+            "count": 74
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[10]",
+            "worst_arrival_ns": 10.142000198364258,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[15]",
+            "worst_arrival_ns": 10.074999809265137,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[3]",
+            "worst_arrival_ns": 10.057000160217285,
+            "count": 74
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[1]",
+            "worst_arrival_ns": 9.9350004196167,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[5]",
+            "worst_arrival_ns": 9.87600040435791,
+            "count": 37
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 6.692999839782715,
+            "count": 111
+          },
+          {
+            "name": "u_core.dout",
+            "worst_arrival_ns": 6.238999843597412,
+            "count": 74
+          }
+        ],
+        "delay_split_ns": {
+          "logic_ns": 5.740000061690807,
+          "routing_ns": 4.304999947547913,
+          "clk_to_q_ns": 0.5249999761581421,
+          "setup_ns": 0.0,
+          "source_ns": 0.0
+        },
+        "hold_analysed": false,
+        "hold_note": "nextpnr's ECP5 flow performs max-delay (setup) analysis only; it reports no hold requirement, so no hold slack is claimed here. Min-delay arrival values are available in the raw report for inspection.",
+        "conclusions": [
+          "$glbnet$clk$TRELLIS_IO_IN: VIOLATED - worst path 10.570 ns needs 10.000 ns, so setup slack is -0.570 ns at 100.000 MHz (achievable 94.607 MHz).",
+          "Critical path u_core.sr[8] -> u_core.sum_pre is 10.570 ns over 63 steps: 5.740 ns logic (54.3%), 4.305 ns routing (40.7%), 0.525 ns clk-to-q.",
+          "Logic delay dominates the critical path, so shortening the combinational depth is the lever that matters.",
+          "Worst net by arrival is u_core.g_tree.u_sum.prod[9] at 10.570 ns (7 sink(s)); the slowest nets are the ones to shorten first.",
+          "Worst capture point is u_core.sum_pre at 10.570 ns over 588 timed pin(s)."
+        ],
+        "utilization": {
+          "lut4": 641,
+          "ff": 775,
+          "bram": 0,
+          "dsp": 16,
+          "io": 93,
+          "lut4_available": 43848,
+          "ff_available": 43848,
+          "cells_nonzero": {
+            "DCCA": 2,
+            "MULT18X18D": 16,
+            "TRELLIS_COMB": 641,
+            "TRELLIS_FF": 775,
+            "TRELLIS_IO": 93
+          }
+        },
+        "worst_achieved_mhz": 94.6073795062975,
+        "timing_met": false
+      }
+    },
+    {
+      "variant": {
+        "name": "pipe_notmdriv",
+        "sum_style": 1,
+        "pipe_stages": 2,
+        "freq_mhz": 100.0,
+        "no_tmdriv": true,
+        "seed": 1,
+        "description": "identical to `pipe` but timing-driven placement disabled (control)",
+        "latency": 3
+      },
+      "ok": true,
+      "error": "",
+      "paths": {
+        "json": "reports\\pipe_notmdriv.json",
+        "report": "reports\\pipe_notmdriv_report.json",
+        "log": "reports\\pipe_notmdriv.log"
+      },
+      "metrics": {
+        "variant": "pipe_notmdriv",
+        "sum_style": 1,
+        "pipe_stages": 2,
+        "latency_clocks": 3,
+        "freq_constraint_mhz": 100.0,
+        "timing_driven_placement": false,
+        "ok": true,
+        "lut4": 641,
+        "ff": 775,
+        "bram": 0,
+        "dsp": 16,
+        "io": 93,
+        "fmax_mhz": 76.46429186360284,
+        "worst_path_ns": 13.077999882400036,
+        "setup_slack_ns": -3.077999882400036,
+        "timing_met": false,
+        "critical_path_start": "u_core.sr[7]",
+        "critical_path_end": "u_core.sum_pre",
+        "critical_path_steps": 61,
+        "logic_ns": 5.740000061690807,
+        "routing_ns": 6.812999844551086,
+        "clk_to_q_ns": 0.5249999761581421
+      },
+      "sta": {
+        "clocks": [
+          {
+            "clock": "$glbnet$clk$TRELLIS_IO_IN",
+            "constraint_mhz": 100.0,
+            "achieved_mhz": 76.46429186360284,
+            "worst_path_ns": 13.077999882400036,
+            "constraint_period_ns": 10.0,
+            "achieved_period_ns": 13.077999882400036,
+            "setup_slack_ns": -3.077999882400036,
+            "met": false
+          }
+        ],
+        "critical_path": {
+          "from_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+          "to_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+          "start_point": "u_core.sr[7]",
+          "end_point": "u_core.sum_pre",
+          "total_ns": 13.077999882400036,
+          "implied_fmax_mhz": 76.46429186360284,
+          "steps": 61,
+          "by_type": {
+            "logic_ns": 5.740000061690807,
+            "routing_ns": 6.812999844551086,
+            "clk_to_q_ns": 0.5249999761581421,
+            "setup_ns": 0.0,
+            "source_ns": 0.0
+          },
+          "breakdown_ns": {
+            "clk-to-q": 0.5249999761581421,
+            "routing": 6.812999844551086,
+            "logic": 5.740000061690807,
+            "setup": 0.0
+          },
+          "culprit_nets": [
+            {
+              "net": "u_core.sr[7][12]",
+              "delay_ns": 2.9159998893737793
+            },
+            {
+              "net": "u_core.prod[7][3]",
+              "delay_ns": 2.678999900817871
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[6]_CCU2C_A1_S1[30]",
+              "delay_ns": 1.218000054359436
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[6]_CCU2C_A1_15_COUT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[6]_CCU2C_A1_14$CCU2_FCI_INT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[6]_CCU2C_A1_14_COUT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[6]_CCU2C_A1_12$CCU2_FCI_INT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[6]_CCU2C_A1_12_COUT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[6]_CCU2C_A1_13$CCU2_FCI_INT",
+              "delay_ns": 0.0
+            },
+            {
+              "net": "u_core.g_tree.u_sum.prod[6]_CCU2C_A1_13_COUT",
+              "delay_ns": 0.0
+            }
+          ]
+        },
+        "bottlenecks_by_endpoint": [
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 13.07800006866455,
+            "count": 588
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[3]",
+            "worst_arrival_ns": 12.539999961853027,
+            "count": 150
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[12]",
+            "worst_arrival_ns": 11.569000244140625,
+            "count": 150
+          },
+          {
+            "name": "dout_slow",
+            "worst_arrival_ns": 7.5960001945495605,
+            "count": 74
+          },
+          {
+            "name": "u_core.dout",
+            "worst_arrival_ns": 6.934000015258789,
+            "count": 74
+          },
+          {
+            "name": "dout[16]",
+            "worst_arrival_ns": 6.269000053405762,
+            "count": 1
+          },
+          {
+            "name": "u_core.sr[0]",
+            "worst_arrival_ns": 5.734000205993652,
+            "count": 32
+          },
+          {
+            "name": "u_core.sr[15]",
+            "worst_arrival_ns": 5.0320000648498535,
+            "count": 32
+          },
+          {
+            "name": "dout[8]",
+            "worst_arrival_ns": 4.889999866485596,
+            "count": 1
+          },
+          {
+            "name": "u_core.sr[1]",
+            "worst_arrival_ns": 4.866000175476074,
+            "count": 32
+          }
+        ],
+        "bottlenecks_by_start": [
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 13.07800006866455,
+            "count": 7
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[1]",
+            "worst_arrival_ns": 12.539999961853027,
+            "count": 14
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 11.949999809265137,
+            "count": 1
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 11.918999671936035,
+            "count": 1
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 11.847999572753906,
+            "count": 1
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 11.807999610900879,
+            "count": 1
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 11.788999557495117,
+            "count": 1
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 11.777000427246094,
+            "count": 1
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 11.737000465393066,
+            "count": 1
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 11.706000328063965,
+            "count": 1
+          }
+        ],
+        "nets_by_delay": [
+          {
+            "name": "u_core.g_tree.u_sum.prod[6]",
+            "worst_arrival_ns": 13.07800006866455,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[1]",
+            "worst_arrival_ns": 12.539999961853027,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[15]",
+            "worst_arrival_ns": 11.569000244140625,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[12]",
+            "worst_arrival_ns": 11.138999938964844,
+            "count": 74
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[5]",
+            "worst_arrival_ns": 11.11299991607666,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[10]",
+            "worst_arrival_ns": 11.095000267028809,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[9]",
+            "worst_arrival_ns": 10.859999656677246,
+            "count": 37
+          },
+          {
+            "name": "u_core.g_tree.u_sum.prod[3]",
+            "worst_arrival_ns": 10.760000228881836,
+            "count": 74
+          },
+          {
+            "name": "rst_n",
+            "worst_arrival_ns": 7.5960001945495605,
+            "count": 775
+          },
+          {
+            "name": "u_core.sum_pre",
+            "worst_arrival_ns": 6.934000015258789,
+            "count": 111
+          }
+        ],
+        "delay_split_ns": {
+          "logic_ns": 5.740000061690807,
+          "routing_ns": 6.812999844551086,
+          "clk_to_q_ns": 0.5249999761581421,
+          "setup_ns": 0.0,
+          "source_ns": 0.0
+        },
+        "hold_analysed": false,
+        "hold_note": "nextpnr's ECP5 flow performs max-delay (setup) analysis only; it reports no hold requirement, so no hold slack is claimed here. Min-delay arrival values are available in the raw report for inspection.",
+        "conclusions": [
+          "$glbnet$clk$TRELLIS_IO_IN: VIOLATED - worst path 13.078 ns needs 10.000 ns, so setup slack is -3.078 ns at 100.000 MHz (achievable 76.464 MHz).",
+          "Critical path u_core.sr[7] -> u_core.sum_pre is 13.078 ns over 61 steps: 5.740 ns logic (43.9%), 6.813 ns routing (52.1%), 0.525 ns clk-to-q.",
+          "Routing dominates the critical path, so this is a placement/congestion problem as much as a logic-depth problem.",
+          "Worst net by arrival is u_core.g_tree.u_sum.prod[6] at 13.078 ns (7 sink(s)); the slowest nets are the ones to shorten first.",
+          "Worst capture point is u_core.sum_pre at 13.078 ns over 588 timed pin(s)."
+        ],
+        "utilization": {
+          "lut4": 641,
+          "ff": 775,
+          "bram": 0,
+          "dsp": 16,
+          "io": 93,
+          "lut4_available": 43848,
+          "ff_available": 43848,
+          "cells_nonzero": {
+            "DCCA": 2,
+            "MULT18X18D": 16,
+            "TRELLIS_COMB": 641,
+            "TRELLIS_FF": 775,
+            "TRELLIS_IO": 93
+          }
+        },
+        "worst_achieved_mhz": 76.46429186360284,
+        "timing_met": false
+      }
+    }
+  ],
+  "experiment": {
+    "rows": [
+      {
+        "variant": "baseline",
+        "sum_style": 0,
+        "pipe_stages": 0,
+        "latency_clocks": 1,
+        "freq_constraint_mhz": 100.0,
+        "timing_driven_placement": true,
+        "ok": true,
+        "lut4": 1132,
+        "ff": 331,
+        "bram": 0,
+        "dsp": 16,
+        "io": 93,
+        "fmax_mhz": 50.970996817805386,
+        "worst_path_ns": 19.619000263512135,
+        "setup_slack_ns": -9.619000263512135,
+        "timing_met": false,
+        "critical_path_start": "u_core.sr[6]",
+        "critical_path_end": "u_core.dout",
+        "critical_path_steps": 77,
+        "logic_ns": 7.825000114738941,
+        "routing_ns": 11.269000172615051,
+        "clk_to_q_ns": 0.5249999761581421
+      },
+      {
+        "variant": "tree",
+        "sum_style": 1,
+        "pipe_stages": 0,
+        "latency_clocks": 1,
+        "freq_constraint_mhz": 100.0,
+        "timing_driven_placement": true,
+        "ok": true,
+        "lut4": 1136,
+        "ff": 331,
+        "bram": 0,
+        "dsp": 16,
+        "io": 93,
+        "fmax_mhz": 49.80079650878906,
+        "worst_path_ns": 20.080000122558594,
+        "setup_slack_ns": -10.080000122558594,
+        "timing_met": false,
+        "critical_path_start": "u_core.sr[1]",
+        "critical_path_end": "u_core.dout",
+        "critical_path_steps": 75,
+        "logic_ns": 7.9900001138448715,
+        "routing_ns": 11.564999856054783,
+        "clk_to_q_ns": 0.5249999761581421
+      },
+      {
+        "variant": "tree_pipe1",
+        "sum_style": 1,
+        "pipe_stages": 1,
+        "latency_clocks": 2,
+        "freq_constraint_mhz": 100.0,
+        "timing_driven_placement": true,
+        "ok": true,
+        "lut4": 826,
+        "ff": 627,
+        "bram": 0,
+        "dsp": 16,
+        "io": 93,
+        "fmax_mhz": 88.32361839890818,
+        "worst_path_ns": 11.321999914944172,
+        "setup_slack_ns": -1.321999914944172,
+        "timing_met": false,
+        "critical_path_start": "u_core.sr[3]",
+        "critical_path_end": "u_core.sum_pre",
+        "critical_path_steps": 53,
+        "logic_ns": 5.598000057041645,
+        "routing_ns": 5.198999881744385,
+        "clk_to_q_ns": 0.5249999761581421
+      },
+      {
+        "variant": "pipe",
+        "sum_style": 1,
+        "pipe_stages": 2,
+        "latency_clocks": 3,
+        "freq_constraint_mhz": 100.0,
+        "timing_driven_placement": true,
+        "ok": true,
+        "lut4": 641,
+        "ff": 775,
+        "bram": 0,
+        "dsp": 16,
+        "io": 93,
+        "fmax_mhz": 94.6073795062975,
+        "worst_path_ns": 10.569999985396862,
+        "setup_slack_ns": -0.569999985396862,
+        "timing_met": false,
+        "critical_path_start": "u_core.sr[8]",
+        "critical_path_end": "u_core.sum_pre",
+        "critical_path_steps": 63,
+        "logic_ns": 5.740000061690807,
+        "routing_ns": 4.304999947547913,
+        "clk_to_q_ns": 0.5249999761581421
+      },
+      {
+        "variant": "pipe_notmdriv",
+        "sum_style": 1,
+        "pipe_stages": 2,
+        "latency_clocks": 3,
+        "freq_constraint_mhz": 100.0,
+        "timing_driven_placement": false,
+        "ok": true,
+        "lut4": 641,
+        "ff": 775,
+        "bram": 0,
+        "dsp": 16,
+        "io": 93,
+        "fmax_mhz": 76.46429186360284,
+        "worst_path_ns": 13.077999882400036,
+        "setup_slack_ns": -3.077999882400036,
+        "timing_met": false,
+        "critical_path_start": "u_core.sr[7]",
+        "critical_path_end": "u_core.sum_pre",
+        "critical_path_steps": 61,
+        "logic_ns": 5.740000061690807,
+        "routing_ns": 6.812999844551086,
+        "clk_to_q_ns": 0.5249999761581421
+      }
+    ],
+    "baseline_fmax_mhz": 50.970996817805386,
+    "best_variant": "pipe",
+    "best_fmax_mhz": 94.6073795062975,
+    "overall_improvement_pct": 85.61022034642433,
+    "improvements": [
+      {
+        "variant": "tree",
+        "description": "balanced adder tree, zero added latency (re-association only)",
+        "fmax_before_mhz": 50.970996817805386,
+        "fmax_after_mhz": 49.80079650878906,
+        "delta_mhz": -1.170200309016323,
+        "improvement_pct": -2.2958160170953223,
+        "latency_clocks": 1,
+        "lut4_delta": 4
+      },
+      {
+        "variant": "tree_pipe1",
+        "description": "adder tree with one register cut (+1 clock)",
+        "fmax_before_mhz": 50.970996817805386,
+        "fmax_after_mhz": 88.32361839890818,
+        "delta_mhz": 37.352621581102795,
+        "improvement_pct": 73.28210926425247,
+        "latency_clocks": 2,
+        "lut4_delta": -306
+      },
+      {
+        "variant": "pipe",
+        "description": "adder tree with two register cuts (+2 clocks)",
+        "fmax_before_mhz": 50.970996817805386,
+        "fmax_after_mhz": 94.6073795062975,
+        "delta_mhz": 43.63638268849212,
+        "improvement_pct": 85.61022034642433,
+        "latency_clocks": 3,
+        "lut4_delta": -491
+      },
+      {
+        "variant": "pipe_notmdriv",
+        "description": "identical to `pipe` but timing-driven placement disabled (control)",
+        "fmax_before_mhz": 50.970996817805386,
+        "fmax_after_mhz": 76.46429186360284,
+        "delta_mhz": 25.493295045797453,
+        "improvement_pct": 50.01529622212928,
+        "latency_clocks": 3,
+        "lut4_delta": -491
+      }
+    ],
+    "timing_driven_placement_control": {
+      "with_timing_driven_placement_mhz": 94.6073795062975,
+      "without_timing_driven_placement_mhz": 76.46429186360284,
+      "delta_mhz": 18.143087642694667,
+      "delta_pct": 23.72752980575344
+    },
+    "baseline_critical_path": {
+      "from_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+      "to_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+      "start_point": "u_core.sr[6]",
+      "end_point": "u_core.dout",
+      "total_ns": 19.619000263512135,
+      "implied_fmax_mhz": 50.970996817805386,
+      "steps": 77,
+      "by_type": {
+        "logic_ns": 7.825000114738941,
+        "routing_ns": 11.269000172615051,
+        "clk_to_q_ns": 0.5249999761581421,
+        "setup_ns": 0.0,
+        "source_ns": 0.0
+      },
+      "breakdown_ns": {
+        "clk-to-q": 0.5249999761581421,
+        "routing": 11.269000172615051,
+        "logic": 7.825000114738941,
+        "setup": 0.0
+      },
+      "culprit_nets": [
+        {
+          "net": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z[3]",
+          "delay_ns": 2.252000093460083
+        },
+        {
+          "net": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z_L6MUX21_SD_1_Z[4]",
+          "delay_ns": 1.9500000476837158
+        },
+        {
+          "net": "u_core.prod[6][2]",
+          "delay_ns": 1.4819999933242798
+        },
+        {
+          "net": "u_core.sr[6][15]",
+          "delay_ns": 1.305999994277954
+        },
+        {
+          "net": "u_core.sum_pre_CCU2C_S1_14_A1",
+          "delay_ns": 1.1610000133514404
+        },
+        {
+          "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_Z_D_LUT4_D_Z[3]",
+          "delay_ns": 0.9900000095367432
+        },
+        {
+          "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_D_Z[3]",
+          "delay_ns": 0.7160000205039978
+        },
+        {
+          "net": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0[3]",
+          "delay_ns": 0.7070000171661377
+        },
+        {
+          "net": "u_core.sum_pre[31]",
+          "delay_ns": 0.7049999833106995
+        },
+        {
+          "net": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1_L6MUX21_Z_D1",
+          "delay_ns": 0.0
+        }
+      ]
+    },
+    "optimised_critical_path": {
+      "from_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+      "to_event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+      "start_point": "u_core.sr[8]",
+      "end_point": "u_core.sum_pre",
+      "total_ns": 10.569999985396862,
+      "implied_fmax_mhz": 94.6073795062975,
+      "steps": 63,
+      "by_type": {
+        "logic_ns": 5.740000061690807,
+        "routing_ns": 4.304999947547913,
+        "clk_to_q_ns": 0.5249999761581421,
+        "setup_ns": 0.0,
+        "source_ns": 0.0
+      },
+      "breakdown_ns": {
+        "clk-to-q": 0.5249999761581421,
+        "routing": 4.304999947547913,
+        "logic": 5.740000061690807,
+        "setup": 0.0
+      },
+      "culprit_nets": [
+        {
+          "net": "u_core.prod[8][2]",
+          "delay_ns": 2.11899995803833
+        },
+        {
+          "net": "u_core.sr[8][8]",
+          "delay_ns": 1.2619999647140503
+        },
+        {
+          "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_S1[30]",
+          "delay_ns": 0.9240000247955322
+        },
+        {
+          "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_2$CCU2_FCI_INT",
+          "delay_ns": 0.0
+        },
+        {
+          "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_2_COUT",
+          "delay_ns": 0.0
+        },
+        {
+          "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_15$CCU2_FCI_INT",
+          "delay_ns": 0.0
+        },
+        {
+          "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_15_COUT",
+          "delay_ns": 0.0
+        },
+        {
+          "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_1$CCU2_FCI_INT",
+          "delay_ns": 0.0
+        },
+        {
+          "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1_1_COUT",
+          "delay_ns": 0.0
+        },
+        {
+          "net": "u_core.g_tree.u_sum.prod[9]_CCU2C_B1$CCU2_FCI_INT",
+          "delay_ns": 0.0
+        }
+      ]
+    },
+    "note": "All figures are nextpnr-ecp5 results for LFE5U-45F/CABGA381/speed-6 produced by this run. No figure is estimated or carried over."
+  },
+  "toolchain": {
+    "wrapper": "tools/oss.bat",
+    "versions": {
+      "yosys": "Yosys 0.66+181 (git sha1 afe6b18f2, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)",
+      "nextpnr-ecp5": "\"nextpnr-ecp5\" -- Next Generation Place and Route (Version nextpnr-0.10-82-g2b560ad0)",
+      "iverilog": "Icarus Verilog version 14.0 (devel) (s20260301-227-g5a99d0e44-dirty)"
+    }
+  },
+  "simulation": [
+    {
+      "top": "fir_top_chain",
+      "pipe_stages": 0,
+      "latency": 1,
+      "ok": true,
+      "checks": 720,
+      "errors": 0,
+      "verdict": "TB_PASS",
+      "log_tail": "TB_PASS LAT=1 checks=720 errors=0\nsim/tb_fir.v:163: $finish called at 7515000 (1ps)"
+    },
+    {
+      "top": "fir_top_tree",
+      "pipe_stages": 0,
+      "latency": 1,
+      "ok": true,
+      "checks": 720,
+      "errors": 0,
+      "verdict": "TB_PASS",
+      "log_tail": "TB_PASS LAT=1 checks=720 errors=0\nsim/tb_fir.v:163: $finish called at 7515000 (1ps)"
+    },
+    {
+      "top": "fir_top_pipe",
+      "pipe_stages": 2,
+      "latency": 3,
+      "ok": true,
+      "checks": 720,
+      "errors": 0,
+      "verdict": "TB_PASS",
+      "log_tail": "TB_PASS LAT=3 checks=720 errors=0\nsim/tb_fir.v:163: $finish called at 7535000 (1ps)"
+    }
+  ],
+  "power": {
+    "estimates": [
+      {
+        "label": "activity_full",
+        "relative_power": 75357682785.93828,
+        "by_class": {
+          "clock": 1597095230.2360125,
+          "data": 73760587555.70226
+        },
+        "toggling_nets": 19,
+        "total_bit_toggles": 2246673,
+        "duration_ns": 30295.0,
+        "model": "P_rel = SUM_nets( class_weight(net) * bit_toggle_rate(net) ), unitless and normalised against the reference run. No process library, no parasitics, no clock-tree model, no leakage: this is a relative comparison only and is NOT signoff power analysis."
+      },
+      {
+        "label": "activity_gated",
+        "relative_power": 27844033668.922264,
+        "by_class": {
+          "clock": 1597095230.2360125,
+          "data": 26246938438.686253
+        },
+        "toggling_nets": 19,
+        "total_bit_toggles": 807247,
+        "duration_ns": 30295.0,
+        "model": "P_rel = SUM_nets( class_weight(net) * bit_toggle_rate(net) ), unitless and normalised against the reference run. No process library, no parasitics, no clock-tree model, no leakage: this is a relative comparison only and is NOT signoff power analysis."
+      },
+      {
+        "label": "activity_idle",
+        "relative_power": 1922528470.0445614,
+        "by_class": {
+          "clock": 1597095230.2360125,
+          "data": 325433239.8085493
+        },
+        "toggling_nets": 17,
+        "total_bit_toggles": 21955,
+        "duration_ns": 30295.0,
+        "model": "P_rel = SUM_nets( class_weight(net) * bit_toggle_rate(net) ), unitless and normalised against the reference run. No process library, no parasitics, no clock-tree model, no leakage: this is a relative comparison only and is NOT signoff power analysis."
+      }
+    ],
+    "comparisons": [
+      {
+        "reference": "activity_full",
+        "candidate": "activity_gated",
+        "reference_relative_power": 75357682785.93828,
+        "candidate_relative_power": 27844033668.922264,
+        "ratio": 0.3694916382715254,
+        "delta_pct": -63.050836172847454,
+        "class_ratios": {
+          "clock": 1.0,
+          "data": 0.3558396063326527
+        },
+        "note": "P_rel = SUM_nets( class_weight(net) * bit_toggle_rate(net) ), unitless and normalised against the reference run. No process library, no parasitics, no clock-tree model, no leakage: this is a relative comparison only and is NOT signoff power analysis."
+      },
+      {
+        "reference": "activity_full",
+        "candidate": "activity_idle",
+        "reference_relative_power": 75357682785.93828,
+        "candidate_relative_power": 1922528470.0445614,
+        "ratio": 0.025512043350718643,
+        "delta_pct": -97.44879566492814,
+        "class_ratios": {
+          "clock": 1.0,
+          "data": 0.0044120207090648485
+        },
+        "note": "P_rel = SUM_nets( class_weight(net) * bit_toggle_rate(net) ), unitless and normalised against the reference run. No process library, no parasitics, no clock-tree model, no leakage: this is a relative comparison only and is NOT signoff power analysis."
+      }
+    ]
+  },
+  "lec": {
+    "criterion": "Pipelined equivalence is defined as output-sequence equality modulo the added latency: fir_top_pipe.dout(t) == fir_top_tree.dout(t - LATENCY_SHIFT), with LATENCY_SHIFT = PIPE_STAGES = 2. Equality at the same t is deliberately NOT claimed, because it is false for any pipeline.",
+    "checks": [
+      {
+        "name": "retiming_pipeline_vs_reference",
+        "script": "flow/lec_pipe_equiv.ys",
+        "claim": "the pipelined implementation is functionally equivalent to the un-pipelined adder tree, delayed by the two clocks the pipeline added",
+        "criterion": "Pipelined equivalence is defined as output-sequence equality modulo the added latency: fir_top_pipe.dout(t) == fir_top_tree.dout(t - LATENCY_SHIFT), with LATENCY_SHIFT = PIPE_STAGES = 2. Equality at the same t is deliberately NOT claimed, because it is false for any pipeline.",
+        "scope": "formal (sequential)",
+        "status": "proven",
+        "proven": true,
+        "detail": "SAT reported no counterexample",
+        "duration_s": 1.32,
+        "log": "reports\\lec\\retiming_pipeline_vs_reference.log",
+        "excerpt": "Solving problem with 397930 variables and 1161792 clauses..\nSAT proof finished - no model found: SUCCESS!"
+      },
+      {
+        "name": "reassociation_chain_vs_tree_full_width",
+        "script": "flow/lec_sum_equiv.ys",
+        "claim": "the balanced adder tree computes the same sum as the serial accumulation chain, at full width (37-bit accumulator, 16 taps)",
+        "criterion": "combinational equivalence, no latency shift",
+        "scope": "formal (combinational, full width) - known to be SAT-hard; expected not to converge",
+        "status": "timeout",
+        "proven": false,
+        "detail": "did not converge within 60s",
+        "duration_s": 60.51,
+        "log": "reports\\lec\\reassociation_chain_vs_tree_full_width.log",
+        "excerpt": "Solving problem with 14639 variables and 39944 clauses.."
+      }
+    ],
+    "proven_count": 1,
+    "total": 2,
+    "note": "A check is only reported as proven when yosys reported a completed proof. Checks that did not converge are reported with their measured status."
+  },
+  "sdc": {
+    "filename": "constr/fir_block.sdc",
+    "summary": {
+      "create_clock": 1,
+      "create_generated_clock": 1,
+      "set_input_delay": 2,
+      "set_output_delay": 2,
+      "set_max_delay": 1,
+      "set_false_path": 1,
+      "set_multicycle_path": 1,
+      "set_clock_groups": 1
+    },
+    "clocks": [
+      {
+        "name": "sys_clk",
+        "period_ns": 10.0,
+        "target": {
+          "kind": "ports",
+          "patterns": [
+            "clk"
+          ]
+        },
+        "waveform": null,
+        "line": 22
+      }
+    ],
+    "generated_clocks": [
+      {
+        "name": "clk_div2",
+        "source": {
+          "kind": "ports",
+          "patterns": [
+            "clk"
+          ]
+        },
+        "target": {
+          "kind": "pins",
+          "patterns": [
+            "u_div/clk_div2_q"
+          ]
+        },
+        "divide_by": 2,
+        "multiply_by": null,
+        "line": 25
+      }
+    ],
+    "input_delays": [
+      {
+        "kind": "input",
+        "target": {
+          "kind": "ports",
+          "patterns": [
+            "din[*]"
+          ]
+        },
+        "clock": "sys_clk",
+        "max_ns": 2.0,
+        "min_ns": null,
+        "line": 36
+      },
+      {
+        "kind": "input",
+        "target": {
+          "kind": "ports",
+          "patterns": [
+            "din[*]"
+          ]
+        },
+        "clock": "sys_clk",
+        "max_ns": null,
+        "min_ns": 0.5,
+        "line": 37
+      }
+    ],
+    "output_delays": [
+      {
+        "kind": "output",
+        "target": {
+          "kind": "ports",
+          "patterns": [
+            "dout[*]"
+          ]
+        },
+        "clock": "sys_clk",
+        "max_ns": 3.0,
+        "min_ns": null,
+        "line": 38
+      },
+      {
+        "kind": "output",
+        "target": {
+          "kind": "ports",
+          "patterns": [
+            "dout[*]"
+          ]
+        },
+        "clock": "sys_clk",
+        "max_ns": null,
+        "min_ns": 0.5,
+        "line": 39
+      }
+    ],
+    "max_delays": [
+      {
+        "value_ns": 6.0,
+        "frm": {
+          "kind": "ports",
+          "patterns": [
+            "din[*]"
+          ]
+        },
+        "to": {
+          "kind": "ports",
+          "patterns": [
+            "dout[*]"
+          ]
+        },
+        "through": null,
+        "line": 54
+      }
+    ],
+    "false_paths": [
+      {
+        "frm": {
+          "kind": "ports",
+          "patterns": [
+            "rst_n"
+          ]
+        },
+        "to": null,
+        "through": null,
+        "line": 44
+      }
+    ],
+    "multicycle_paths": [
+      {
+        "frm": {
+          "kind": "ports",
+          "patterns": [
+            "din[*]"
+          ]
+        },
+        "to": {
+          "kind": "ports",
+          "patterns": [
+            "dout[*]"
+          ]
+        },
+        "setup": 2,
+        "hold": null,
+        "line": 49
+      }
+    ],
+    "clock_groups": [
+      {
+        "mode": "asynchronous",
+        "groups": [
+          [
+            "sys_clk"
+          ],
+          [
+            "clk_div2"
+          ]
+        ],
+        "line": 33
+      }
+    ],
+    "primary_period_ns": 10.0
+  }
+}

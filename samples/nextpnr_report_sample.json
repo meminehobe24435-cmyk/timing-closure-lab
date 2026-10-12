@@ -1,0 +1,3278 @@
+{
+ "critical_paths": [
+  {
+   "from": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "path": [
+    {
+     "delay": 0.5249999761581421,
+     "from": {
+      "cell": "u_core.sr[6]_TRELLIS_FF_Q",
+      "loc": [
+       61,
+       23
+      ],
+      "port": "Q"
+     },
+     "to": {
+      "cell": "u_core.sr[6]_TRELLIS_FF_Q",
+      "loc": [
+       61,
+       23
+      ],
+      "port": "Q"
+     },
+     "type": "clk-to-q"
+    },
+    {
+     "delay": 1.305999994277954,
+     "from": {
+      "cell": "u_core.sr[6]_TRELLIS_FF_Q",
+      "loc": [
+       61,
+       23
+      ],
+      "port": "Q"
+     },
+     "net": "u_core.sr[6][15]",
+     "sources": [
+      "rtl/fir_core.v:75.29-75.31"
+     ],
+     "to": {
+      "cell": "u_core.g_chain.u_sum.prod[6]_MULT18X18D_P9",
+      "loc": [
+       61,
+       22
+      ],
+      "port": "A16"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 3.927000045776367,
+     "from": {
+      "cell": "u_core.g_chain.u_sum.prod[6]_MULT18X18D_P9",
+      "loc": [
+       61,
+       22
+      ],
+      "port": "A16"
+     },
+     "to": {
+      "cell": "u_core.g_chain.u_sum.prod[6]_MULT18X18D_P9",
+      "loc": [
+       61,
+       22
+      ],
+      "port": "P2"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 1.4819999933242798,
+     "from": {
+      "cell": "u_core.g_chain.u_sum.prod[6]_MULT18X18D_P9",
+      "loc": [
+       61,
+       22
+      ],
+      "port": "P2"
+     },
+     "net": "u_core.prod[6][2]",
+     "sources": [
+      "rtl/fir_core.v:93.36-93.45"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z_LUT4_Z",
+      "loc": [
+       55,
+       23
+      ],
+      "port": "B"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.23600000143051147,
+     "from": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z_LUT4_Z",
+      "loc": [
+       55,
+       23
+      ],
+      "port": "B"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z_LUT4_Z",
+      "loc": [
+       55,
+       23
+      ],
+      "port": "F"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 2.252000093460083,
+     "from": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z_LUT4_Z",
+      "loc": [
+       55,
+       23
+      ],
+      "port": "F"
+     },
+     "net": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z[3]",
+     "sources": [
+      "share/yosys/lattice/cells_map_trellis.v:108.23-108.24"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z_L6MUX21_SD_1_D1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       52,
+       44
+      ],
+      "port": "M"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.25600001215934753,
+     "from": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z_L6MUX21_SD_1_D1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       52,
+       44
+      ],
+      "port": "M"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z_L6MUX21_SD_1_D1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       52,
+       44
+      ],
+      "port": "OFX"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 1.9500000476837158,
+     "from": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z_L6MUX21_SD_1_D1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       52,
+       44
+      ],
+      "port": "OFX"
+     },
+     "net": "u_core.sum_pre_LUT4_Z_D_LUT4_Z_D_LUT4_Z_D_LUT4_C_A_L6MUX21_SD_Z_L6MUX21_SD_1_Z[4]",
+     "sources": [
+      "share/yosys/lattice/cells_map_trellis.v:108.23-108.24"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_D_LUT4_D_Z_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       45,
+       28
+      ],
+      "port": "M"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.25600001215934753,
+     "from": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_D_LUT4_D_Z_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       45,
+       28
+      ],
+      "port": "M"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_D_LUT4_D_Z_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       45,
+       28
+      ],
+      "port": "OFX"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0.9900000095367432,
+     "from": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_D_LUT4_D_Z_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       45,
+       28
+      ],
+      "port": "OFX"
+     },
+     "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_Z_D_LUT4_D_Z[3]",
+     "sources": [
+      "share/yosys/lattice/cells_map_trellis.v:108.23-108.24"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_D_Z_LUT4_Z_1",
+      "loc": [
+       39,
+       28
+      ],
+      "port": "D"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.23600000143051147,
+     "from": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_D_Z_LUT4_Z_1",
+      "loc": [
+       39,
+       28
+      ],
+      "port": "D"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_D_Z_LUT4_Z_1",
+      "loc": [
+       39,
+       28
+      ],
+      "port": "F"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0.7160000205039978,
+     "from": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_D_Z_LUT4_Z_1",
+      "loc": [
+       39,
+       28
+      ],
+      "port": "F"
+     },
+     "net": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_D_Z[3]",
+     "sources": [
+      "share/yosys/lattice/cells_map_trellis.v:108.23-108.24"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "M"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.25600001215934753,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "M"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "OFX"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "OFX"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1_L6MUX21_Z_D1",
+     "sources": [
+      "share/yosys/lattice/cells_map_trellis.v:157.62-157.64"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "FXB"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.24199999868869781,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "FXB"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "OFX"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "OFX"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0_L6MUX21_Z_D1",
+     "sources": [
+      "share/yosys/lattice/cells_map_trellis.v:157.70-157.72"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_Z_D_LUT4_D_Z_LUT4_C",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "FXB"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.24199999868869781,
+     "from": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_Z_D_LUT4_D_Z_LUT4_C",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "FXB"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_Z_D_LUT4_D_Z_LUT4_C",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "OFX"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0.7070000171661377,
+     "from": {
+      "cell": "u_core.sum_pre_LUT4_Z_D_LUT4_D_Z_LUT4_Z_1_D_LUT4_D_Z_PFUMX_Z_C0_PFUMX_C0_Z_PFUMX_Z_C0_PFUMX_C0_Z_LUT4_Z_1_D_PFUMX_C0_Z_LUT4_Z_D_LUT4_D_Z_LUT4_C",
+      "loc": [
+       39,
+       27
+      ],
+      "port": "OFX"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_12_B0_PFUMX_Z_C0[3]",
+     "sources": [
+      "share/yosys/lattice/cells_map_trellis.v:108.23-108.24"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14_A1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       39,
+       26
+      ],
+      "port": "D"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.23600000143051147,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14_A1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       39,
+       26
+      ],
+      "port": "D"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14_A1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       39,
+       26
+      ],
+      "port": "F"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14_A1_PFUMX_Z_ALUT_LUT4_Z",
+      "loc": [
+       39,
+       26
+      ],
+      "port": "F"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_14_A1_PFUMX_Z_ALUT",
+     "sources": [
+      "share/yosys/lattice/cells_map_trellis.v:133.22-133.24"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14_A1_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       39,
+       26
+      ],
+      "port": "F1"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.16500000655651093,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14_A1_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       39,
+       26
+      ],
+      "port": "F1"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14_A1_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       39,
+       26
+      ],
+      "port": "OFX"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 1.1610000133514404,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14_A1_PFUMX_Z_BLUT_LUT4_Z",
+      "loc": [
+       39,
+       26
+      ],
+      "port": "OFX"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_14_A1",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14$CCU2_COMB1",
+      "loc": [
+       41,
+       29
+      ],
+      "port": "A"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.44699999690055847,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14$CCU2_COMB1",
+      "loc": [
+       41,
+       29
+      ],
+      "port": "A"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14$CCU2_COMB1",
+      "loc": [
+       41,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_14$CCU2_COMB1",
+      "loc": [
+       41,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_14_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_12$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_12$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_12_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_10$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_10$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_10$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_10$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_10$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_10$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_10$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_10$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_10$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_10_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_8$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_8$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_8$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_8$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_8$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_8$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_8$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_8$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_8$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_8_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_7$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_7$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_7$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_7$CCU2_COMB0",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_7$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_7$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_7$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_7$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_7$CCU2_COMB1",
+      "loc": [
+       42,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_7_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_6$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_6$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_6$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_6$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_6$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_6$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_6$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_6$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_6$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_6_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_5$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_5$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_5$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_5$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_5$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_5$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_5$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_5$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_5$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_5_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_4$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_4$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_4$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_4$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_4$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_4$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_4$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_4$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_4$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_4_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_3$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_3$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_3$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_3$CCU2_COMB0",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_3$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_3$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_3$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_3$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_3$CCU2_COMB1",
+      "loc": [
+       43,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_3_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_1$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_1$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_1$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_1$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_1$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_1$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_1$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_1$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_1$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_1_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_13$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_13$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_13$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_13$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_13$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_13$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_13$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_13$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_13$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_13_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_11$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_11$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_11$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_11$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_11$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_11$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_11$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_11$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_11$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_11_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_9$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_9$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_9$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_9$CCU2_COMB0",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_9$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_9$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_9$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1_9$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1_9$CCU2_COMB1",
+      "loc": [
+       44,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1_9_COUT",
+     "sources": [
+      "share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4",
+      "share/yosys/lattice/ccu2c_sim.vh:9.9-9.13"
+     ],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1$CCU2_COMB0",
+      "loc": [
+       45,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.07100000232458115,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1$CCU2_COMB0",
+      "loc": [
+       45,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1$CCU2_COMB0",
+      "loc": [
+       45,
+       29
+      ],
+      "port": "FCO"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1$CCU2_COMB0",
+      "loc": [
+       45,
+       29
+      ],
+      "port": "FCO"
+     },
+     "net": "u_core.sum_pre_CCU2C_S1$CCU2_FCI_INT",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1$CCU2_COMB1",
+      "loc": [
+       45,
+       29
+      ],
+      "port": "FCI"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.40299999713897705,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1$CCU2_COMB1",
+      "loc": [
+       45,
+       29
+      ],
+      "port": "FCI"
+     },
+     "to": {
+      "cell": "u_core.sum_pre_CCU2C_S1$CCU2_COMB1",
+      "loc": [
+       45,
+       29
+      ],
+      "port": "F"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 0.7049999833106995,
+     "from": {
+      "cell": "u_core.sum_pre_CCU2C_S1$CCU2_COMB1",
+      "loc": [
+       45,
+       29
+      ],
+      "port": "F"
+     },
+     "net": "u_core.sum_pre[31]",
+     "sources": [
+      "rtl/fir_core.v:106.29-106.36"
+     ],
+     "to": {
+      "cell": "u_core.dout_TRELLIS_FF_Q_4",
+      "loc": [
+       45,
+       28
+      ],
+      "port": "M"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0,
+     "from": {
+      "cell": "u_core.dout_TRELLIS_FF_Q_4",
+      "loc": [
+       45,
+       28
+      ],
+      "port": "M"
+     },
+     "to": {
+      "cell": "u_core.dout_TRELLIS_FF_Q_4",
+      "loc": [
+       45,
+       28
+      ],
+      "port": "M"
+     },
+     "type": "setup"
+    }
+   ],
+   "to": "posedge $glbnet$clk$TRELLIS_IO_IN"
+  },
+  {
+   "from": "<async>",
+   "path": [
+    {
+     "delay": 0,
+     "from": {
+      "cell": "rst_n$tr_io",
+      "loc": [
+       6,
+       0
+      ],
+      "port": "O"
+     },
+     "to": {
+      "cell": "rst_n$tr_io",
+      "loc": [
+       6,
+       0
+      ],
+      "port": "O"
+     },
+     "type": "source"
+    },
+    {
+     "delay": 0.7850000262260437,
+     "from": {
+      "cell": "rst_n$tr_io",
+      "loc": [
+       6,
+       0
+      ],
+      "port": "O"
+     },
+     "net": "rst_n$TRELLIS_IO_IN",
+     "sources": [
+      "rtl/fir_block_top.v:30.17-30.22"
+     ],
+     "to": {
+      "cell": "rst_n_LUT4_D",
+      "loc": [
+       6,
+       2
+      ],
+      "port": "D"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.23600000143051147,
+     "from": {
+      "cell": "rst_n_LUT4_D",
+      "loc": [
+       6,
+       2
+      ],
+      "port": "D"
+     },
+     "to": {
+      "cell": "rst_n_LUT4_D",
+      "loc": [
+       6,
+       2
+      ],
+      "port": "F"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 6.494999885559082,
+     "from": {
+      "cell": "rst_n_LUT4_D",
+      "loc": [
+       6,
+       2
+      ],
+      "port": "F"
+     },
+     "net": "rst_n_LUT4_D_Z",
+     "sources": [],
+     "to": {
+      "cell": "u_core.sr[3]_TRELLIS_FF_Q_7",
+      "loc": [
+       52,
+       45
+      ],
+      "port": "LSR"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.42399999499320984,
+     "from": {
+      "cell": "u_core.sr[3]_TRELLIS_FF_Q_7",
+      "loc": [
+       52,
+       45
+      ],
+      "port": "LSR"
+     },
+     "to": {
+      "cell": "u_core.sr[3]_TRELLIS_FF_Q_7",
+      "loc": [
+       52,
+       45
+      ],
+      "port": "LSR"
+     },
+     "type": "setup"
+    }
+   ],
+   "to": "posedge $glbnet$clk$TRELLIS_IO_IN"
+  },
+  {
+   "from": "<async>",
+   "path": [
+    {
+     "delay": 0,
+     "from": {
+      "cell": "rst_n$tr_io",
+      "loc": [
+       6,
+       0
+      ],
+      "port": "O"
+     },
+     "to": {
+      "cell": "rst_n$tr_io",
+      "loc": [
+       6,
+       0
+      ],
+      "port": "O"
+     },
+     "type": "source"
+    },
+    {
+     "delay": 0.7850000262260437,
+     "from": {
+      "cell": "rst_n$tr_io",
+      "loc": [
+       6,
+       0
+      ],
+      "port": "O"
+     },
+     "net": "rst_n$TRELLIS_IO_IN",
+     "sources": [
+      "rtl/fir_block_top.v:30.17-30.22"
+     ],
+     "to": {
+      "cell": "rst_n_LUT4_D",
+      "loc": [
+       6,
+       2
+      ],
+      "port": "D"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.23600000143051147,
+     "from": {
+      "cell": "rst_n_LUT4_D",
+      "loc": [
+       6,
+       2
+      ],
+      "port": "D"
+     },
+     "to": {
+      "cell": "rst_n_LUT4_D",
+      "loc": [
+       6,
+       2
+      ],
+      "port": "F"
+     },
+     "type": "logic"
+    },
+    {
+     "delay": 5.973999977111816,
+     "from": {
+      "cell": "rst_n_LUT4_D",
+      "loc": [
+       6,
+       2
+      ],
+      "port": "F"
+     },
+     "net": "rst_n_LUT4_D_Z",
+     "sources": [],
+     "to": {
+      "cell": "dout_slow_TRELLIS_FF_Q_17",
+      "loc": [
+       83,
+       35
+      ],
+      "port": "LSR"
+     },
+     "type": "routing"
+    },
+    {
+     "delay": 0.42399999499320984,
+     "from": {
+      "cell": "dout_slow_TRELLIS_FF_Q_17",
+      "loc": [
+       83,
+       35
+      ],
+      "port": "LSR"
+     },
+     "to": {
+      "cell": "dout_slow_TRELLIS_FF_Q_17",
+      "loc": [
+       83,
+       35
+      ],
+      "port": "LSR"
+     },
+     "type": "setup"
+    }
+   ],
+   "to": "posedge $glbnet$clk_div2$TRELLIS_IO_OUT"
+  }
+ ],
+ "detailed_net_timings": [
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_11$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_10",
+     "delay": [
+      8.564000129699707,
+      18.871000289916992
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[26]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_13$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_11",
+     "delay": [
+      8.614999771118164,
+      18.83099937438965
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[25]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_13$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_12",
+     "delay": [
+      8.501999855041504,
+      18.799999237060547
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[24]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_1$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_13",
+     "delay": [
+      8.553000450134277,
+      18.760000228881836
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[23]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_1$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_14",
+     "delay": [
+      8.4399995803833,
+      18.729000091552734
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[22]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_3$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_15",
+     "delay": [
+      8.491000175476074,
+      18.68899917602539
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[21]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_3$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_16",
+     "delay": [
+      8.220999717712402,
+      18.658000946044922
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[20]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_4$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_17",
+     "delay": [
+      8.392999649047852,
+      18.527999877929688
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[19]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_4$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_18",
+     "delay": [
+      8.369999885559082,
+      18.586999893188477
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[18]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_5$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_19",
+     "delay": [
+      8.420999526977539,
+      18.547000885009766
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[17]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_5$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_20",
+     "delay": [
+      8.307999610900879,
+      18.516000747680664
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[16]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_6$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_21",
+     "delay": [
+      8.359000205993652,
+      18.47599983215332
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[15]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_6$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_22",
+     "delay": [
+      8.246000289916992,
+      18.44499969482422
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[14]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_7$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_23",
+     "delay": [
+      8.29699993133545,
+      18.405000686645508
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[13]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_7$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_24",
+     "delay": [
+      8.027000427246094,
+      18.374000549316406
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[12]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_8$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_25",
+     "delay": [
+      8.092000007629395,
+      18.243999481201172
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[11]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_8$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_26",
+     "delay": [
+      8.182000160217285,
+      18.30299949645996
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[10]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_10$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_27",
+     "delay": [
+      8.302000045776367,
+      18.26300048828125
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[9]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_10$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_28",
+     "delay": [
+      8.031999588012695,
+      18.23200035095215
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[8]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_12$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_29",
+     "delay": [
+      8.17199993133545,
+      18.191999435424805
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[7]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_12$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_30",
+     "delay": [
+      8.180000305175781,
+      18.160999298095703
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[6]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_14$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_31",
+     "delay": [
+      8.086000442504883,
+      17.954999923706055
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[5]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_14$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_32",
+     "delay": [
+      8.220999717712402,
+      17.347000122070312
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[4]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_2$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_33",
+     "delay": [
+      8.522000312805176,
+      16.60300064086914
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[3]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_LUT4_Z",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_34",
+     "delay": [
+      6.718999862670898,
+      11.236000061035156
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[0]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_LUT4_Z_1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_35",
+     "delay": [
+      6.698999881744385,
+      13.178999900817871
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[1]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_PFUMX_Z_BLUT_LUT4_Z",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_36",
+     "delay": [
+      9.215999603271484,
+      15.956000328063965
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[2]",
+   "port": "OFX",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_5",
+     "delay": [
+      8.190999984741211,
+      19.04400062561035
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    },
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_4",
+     "delay": [
+      8.765999794006348,
+      19.618999481201172
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    },
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_3",
+     "delay": [
+      8.442000389099121,
+      19.295000076293945
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    },
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_2",
+     "delay": [
+      8.550000190734863,
+      19.402999877929688
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    },
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_1",
+     "delay": [
+      8.560999870300293,
+      19.413999557495117
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    },
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q",
+     "delay": [
+      8.569000244140625,
+      19.422000885009766
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[31]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_6",
+     "delay": [
+      8.687999725341797,
+      19.01300048828125
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[30]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_9$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_7",
+     "delay": [
+      8.73900032043457,
+      18.972999572753906
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[29]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_9$CCU2_COMB0",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_8",
+     "delay": [
+      8.62600040435791,
+      18.941999435424805
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[28]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "u_core.sum_pre_CCU2C_S1_11$CCU2_COMB1",
+   "endpoints": [
+    {
+     "cell": "u_core.dout_TRELLIS_FF_Q_9",
+     "delay": [
+      8.586999893188477,
+      18.812000274658203
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "DI"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sum_pre[27]",
+   "port": "F",
+   "sources": [
+    "rtl/fir_core.v:106.29-106.36"
+   ]
+  },
+  {
+   "driver": "din[15]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q",
+     "delay": [
+      2.558000087738037,
+      2.558000087738037
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[15]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[14]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_1",
+     "delay": [
+      1.9989999532699585,
+      1.9989999532699585
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[14]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[4]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_10",
+     "delay": [
+      2.1089999675750732,
+      2.1089999675750732
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[4]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[5]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_11",
+     "delay": [
+      2.316999912261963,
+      2.316999912261963
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[5]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[3]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_12",
+     "delay": [
+      1.9730000495910645,
+      1.9730000495910645
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[3]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[2]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_13",
+     "delay": [
+      1.7120000123977661,
+      1.7120000123977661
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[2]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[1]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_14",
+     "delay": [
+      2.119999885559082,
+      2.119999885559082
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[1]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[0]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_15",
+     "delay": [
+      2.558000087738037,
+      2.558000087738037
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[0]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[13]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_2",
+     "delay": [
+      2.875999927520752,
+      2.875999927520752
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[13]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[12]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_3",
+     "delay": [
+      1.9110000133514404,
+      1.9110000133514404
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[12]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[11]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_4",
+     "delay": [
+      2.2839999198913574,
+      2.2839999198913574
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[11]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[10]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_5",
+     "delay": [
+      1.9290000200271606,
+      1.9290000200271606
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[10]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[8]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_6",
+     "delay": [
+      1.930999994277954,
+      1.930999994277954
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[8]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[9]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_7",
+     "delay": [
+      2.4739999771118164,
+      2.4739999771118164
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[9]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[7]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_8",
+     "delay": [
+      1.8589999675750732,
+      1.8589999675750732
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[7]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "din[6]$tr_io",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[0]_TRELLIS_FF_Q_9",
+     "delay": [
+      2.558000087738037,
+      2.558000087738037
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "<async>",
+   "net": "din[6]$TRELLIS_IO_IN",
+   "port": "O",
+   "sources": [
+    "rtl/fir_core.v:47.39-47.42"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q",
+     "delay": [
+      1.6920000314712524,
+      1.7869999408721924
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][15]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q_1",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q_1",
+     "delay": [
+      1.972000002861023,
+      2.066999912261963
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][14]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q_10",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q_10",
+     "delay": [
+      1.649999976158142,
+      1.7450000047683716
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][5]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q_11",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q_11",
+     "delay": [
+      2.01200008392334,
+      2.1070001125335693
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][4]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q_12",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q_12",
+     "delay": [
+      1.2289999723434448,
+      1.3240000009536743
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][3]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q_13",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q_13",
+     "delay": [
+      1.6449999809265137,
+      1.7400000095367432
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][2]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q_14",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q_14",
+     "delay": [
+      1.6890000104904175,
+      1.784000039100647
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][1]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q_15",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q_15",
+     "delay": [
+      1.7730000019073486,
+      1.8680000305175781
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][0]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q_2",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q_2",
+     "delay": [
+      1.4329999685287476,
+      1.527999997138977
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][13]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q_3",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q_3",
+     "delay": [
+      1.4880000352859497,
+      1.5829999446868896
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][12]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q_4",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q_4",
+     "delay": [
+      1.2289999723434448,
+      1.3240000009536743
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][11]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  },
+  {
+   "driver": "u_core.sr[9]_TRELLIS_FF_Q_5",
+   "endpoints": [
+    {
+     "cell": "u_core.sr[10]_TRELLIS_FF_Q_5",
+     "delay": [
+      1.2289999723434448,
+      1.3240000009536743
+     ],
+     "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+     "port": "M"
+    }
+   ],
+   "event": "posedge $glbnet$clk$TRELLIS_IO_IN",
+   "net": "u_core.sr[9][10]",
+   "port": "Q",
+   "sources": [
+    "rtl/fir_core.v:75.29-75.31"
+   ]
+  }
+ ],
+ "fmax": {
+  "$glbnet$clk$TRELLIS_IO_IN": {
+   "achieved": 50.97100067138672,
+   "constraint": 100
+  }
+ },
+ "utilization": {
+  "ALU54B": {
+   "available": 36,
+   "used": 0
+  },
+  "CLKDIVF": {
+   "available": 4,
+   "used": 0
+  },
+  "DCCA": {
+   "available": 56,
+   "used": 2
+  },
+  "DCSC": {
+   "available": 2,
+   "used": 0
+  },
+  "DCUA": {
+   "available": 2,
+   "used": 0
+  },
+  "DDRDLL": {
+   "available": 4,
+   "used": 0
+  },
+  "DLLDELD": {
+   "available": 8,
+   "used": 0
+  },
+  "DP16KD": {
+   "available": 108,
+   "used": 0
+  },
+  "DQSBUFM": {
+   "available": 10,
+   "used": 0
+  },
+  "DTR": {
+   "available": 1,
+   "used": 0
+  },
+  "ECLKBRIDGECS": {
+   "available": 2,
+   "used": 0
+  },
+  "ECLKSYNCB": {
+   "available": 10,
+   "used": 0
+  },
+  "EHXPLLL": {
+   "available": 4,
+   "used": 0
+  },
+  "EXTREFB": {
+   "available": 2,
+   "used": 0
+  },
+  "GSR": {
+   "available": 1,
+   "used": 0
+  },
+  "IOLOGIC": {
+   "available": 160,
+   "used": 0
+  },
+  "JTAGG": {
+   "available": 1,
+   "used": 0
+  },
+  "MULT18X18D": {
+   "available": 72,
+   "used": 16
+  },
+  "OSCG": {
+   "available": 1,
+   "used": 0
+  },
+  "PCSCLKDIV": {
+   "available": 2,
+   "used": 0
+  },
+  "SEDGA": {
+   "available": 1,
+   "used": 0
+  },
+  "SIOLOGIC": {
+   "available": 85,
+   "used": 0
+  },
+  "TRELLIS_COMB": {
+   "available": 43848,
+   "used": 1132
+  },
+  "TRELLIS_ECLKBUF": {
+   "available": 8,
+   "used": 0
+  },
+  "TRELLIS_FF": {
+   "available": 43848,
+   "used": 331
+  },
+  "TRELLIS_IO": {
+   "available": 245,
+   "used": 93
+  },
+  "TRELLIS_RAMW": {
+   "available": 5481,
+   "used": 0
+  },
+  "USRMCLK": {
+   "available": 1,
+   "used": 0
+  }
+ }
+}
