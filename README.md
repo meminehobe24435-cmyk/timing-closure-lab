@@ -100,7 +100,7 @@ py -3.12 -m tclab sim                                # RTL 自检仿真
 ### 5. 跑测试
 
 ```bash
-py -3.12 -m pytest tests -q        # 275 passed
+py -3.12 -m pytest tests -q        # 278 passed
 ```
 
 ---
@@ -200,7 +200,7 @@ P_rel = Σ_net ( class_weight(net) × bit_toggle_rate(net) )
 
 ### 测试
 
-**275 passed**（`py -3.12 -m pytest tests -q`，约 52 秒）。其中 **265 项不依赖 EDA 工具**（CI 上保证执行），10 项是真实跑综合/布局布线/仿真/形式验证的集成测试（**无工具时自动跳过**）。
+**278 passed**（`py -3.12 -m pytest tests -q`，约 52 秒）。其中 **268 项不依赖 EDA 工具**（任何环境都执行），10 项是真实跑综合/布局布线/仿真/形式验证的集成测试（**工具不可用时自动跳过**，工具可用时也会在 CI 上真跑）。
 
 ---
 
@@ -215,7 +215,7 @@ P_rel = Σ_net ( class_weight(net) × bit_toggle_rate(net) )
 | **逻辑等价（PV 相邻）** | yosys `equiv_make/equiv_simple/equiv_induct` + `miter` + `sat -prove-asserts`，证明流水化后**延迟若干拍输出一致** | 流水等价 **PROVEN**（`dout(t) == tree.dout(t−2)`，从复位起逐拍断言）；重结合全宽 CEC **33.6 分钟未收敛**，如实标注未证明 |
 | **低功耗（翻转率与功耗估算）** | `iverilog` dump VCD → 自研 VCD 解析器逐位统计翻转率 → 相对动态功耗模型；对比全速/占空比/静止三场景 | 占空比 1/4：**P_rel × 0.3695（−63.05%）**；静止：**× 0.0255**；其中**时钟功耗比值恒为 1.0000**，降的全是数据网络（0.3558） |
 | **TCL 脚本** | 实测确认 `yosys 0.66+181` **内建 TCL 8.6.12**（`-c`/`--tcl-scriptfile`），因此流程脚本用 TCL 写：`flow/*.ys` 与 LEC 脚本；SDC 本身就是 TCL 方言 | `-c file.tcl` 与 `yosys -import` 实测可用；`-p`/`-s` 脚本化流程脚本 6 个 |
-| **Python 分析** | 7 个模块：`sdc` / `report_parse` / `sta` / `power` / `lec` / `flow` / `runner` / `cli`，无第三方运行时依赖 | 解析器覆盖真实报告 367 条网络时序、6 条关键路径；**275 项 pytest**；一条命令跑完整流程 |
+| **Python 分析** | 7 个模块：`sdc` / `report_parse` / `sta` / `power` / `lec` / `flow` / `runner` / `cli`，无第三方运行时依赖 | 解析器覆盖真实报告 367 条网络时序、6 条关键路径；**278 项 pytest**；一条命令跑完整流程 |
 
 ---
 
@@ -228,7 +228,7 @@ P_rel = Σ_net ( class_weight(net) × bit_toggle_rate(net) )
 - **时序收敛实验**：3 种手段（重结合 / 流水 / 时序驱动布局开关）的对照，全部量化。
 - **逻辑等价检查**：流水等价形式化证明（PROVEN）+ 重结合的形式化尝试（未收敛，如实报告）+ 2160 次逐拍仿真比对。
 - **功耗**：VCD 翻转率提取 + 相对动态功耗模型 + 三场景对照。
-- **测试与 CI**：275 项 pytest；GitHub Actions（Ubuntu + Windows）。
+- **测试与 CI**：278 项 pytest；GitHub Actions（Ubuntu + Windows）。
 
 **没有做**：签核 STA、DRC/LVS、UPF/CPF、多物理角 PVT、真实工艺库、ASIC 综合、时钟树综合（CTS）、扫描链/DFT、真实芯片流片。
 
@@ -250,7 +250,8 @@ P_rel = Σ_net ( class_weight(net) × bit_toggle_rate(net) )
 10. **`set` 变量在解析时不可见**：原实现先解析完所有命令、再统一求值，于是 `set P 10` 之后的 `$P` 一律报"未定义变量"。修法：`set` 在解析阶段就地求值。
 11. **同名内部线被误判为等价**：`equiv_make` 按名字配对，gold 的组合 `n1` 与 gate 的**寄存后** `n1` 被当成一对，产生 518 个**永远证不出来**的 `$equiv` 义务。修法：改用 `miter`+`sat` 的有界证明表述流水等价，并在 `flow/lec_pipe_equiv.ys` 注释里写明这条路的坑。
 12. **`float("NaN")` 能解析成功**：时序报告里的 `"NaN"` 曾被原样读入，会向上污染所有 slack 计算。修法：`_as_float` 增加 `math.isfinite` 检查，非有限值退化为默认值。
-13. **把「命令找不到」当成了版本号，导致 CI 首次运行变红**：首次推送到 GitHub 后**两个单元测试 job 都失败**——挂的不是解析层，而是**工具可用性探测写错了**：探测函数只要工具"有输出"就判定可用，而工具不存在时 shell 会打印 `'iverilog' is not recognized as an internal or external command` 并返回非零，这条消息被当成了版本字符串，于是 EDA 集成测试**在没有任何工具链的 runner 上真的跑了起来并失败**，而不是被跳过。修法：改为按**输出内容**判断（`looks_like_missing_tool`），**不能只看返回码**——因为 `nextpnr-ecp5 --version` 正常时也是把版本横幅打到 stderr 并返回 1。已补回归测试并重新推送，之后 CI 转绿。
+13. **把「命令找不到」当成了版本号，导致 CI 首次运行变红**：首次推送到 GitHub 后**两个单元测试 job 都失败**——挂的不是解析层，而是**工具可用性探测写错了**：探测函数只要工具"有输出"就判定可用，而工具不存在时 shell 会打印 `'iverilog' is not recognized as an internal or external command` 并返回非零，这条消息被当成了版本字符串，于是 EDA 集成测试**在没有任何工具链的 runner 上真的跑了起来并失败**，而不是被跳过。修法：改为按**输出内容**判断（`looks_like_missing_tool`），**不能只看返回码**——因为 `nextpnr-ecp5 --version` 正常时也是把版本横幅打到 stderr 并返回 1。已补回归测试。
+14. **工具版本漂移**：修完第 13 条后 CI 第二次变红，暴露出两处对工具版本的隐含假设——① Ubuntu 归档里的 `nextpnr-ecp5` **版本较旧、根本没有 `--sdc` 选项**，直接报 `unrecognised option '--sdc'`；② 该版本的 `yosys` 打印资源统计的**格式与 OSS CAD Suite 不同**，按日志正则抓 `TRELLIS_FF` 数量抓不到。修法：改为**探测** `nextpnr-ecp5` 是否支持 `--sdc`（不支持则省略该参数并**显式告警**，`require_sdc=True` 可改为硬失败），以及**从综合出的 JSON 网表里数触发器**而不是解析日志文本。两处都补了回归测试。
 
 ---
 
@@ -310,7 +311,7 @@ timing-closure-lab/
 │   ├── runner.py                 工具定位、调用、超时与进程树终止
 │   └── cli.py / __main__.py      命令行入口
 │
-├── tests/                        275 项 pytest
+├── tests/                        278 项 pytest
 │   ├── conftest.py               共享 fixture + EDA 可用性探测（自动跳过）
 │   ├── test_sdc.py               SDC 解析（含错误语法带行号）
 │   ├── test_report_parse.py      报告解析（含空报告 / 缺字段 / NaN）
@@ -341,7 +342,7 @@ timing-closure-lab/
 ### 测试
 
 ```bash
-py -3.12 -m pytest tests -q        # 275 passed
+py -3.12 -m pytest tests -q        # 278 passed
 ```
 
 | 覆盖面 | 说明 |
@@ -364,15 +365,24 @@ py -3.12 -m pytest tests -q        # 275 passed
 - **`unit-tests`**：Ubuntu + Windows 矩阵，Python 3.12，跑 `pytest tests -v -ra`。
 - **`static-checks`**：字节编译 + **全仓源文件 UTF-8 无 BOM 检查** + 用仓库内 `samples/` 的真实报告跑通 CLI。
 
-**如实说明 CI 的降级范围**：GitHub runner 上**没有 OSS CAD Suite**。workflow 会**尽力**在 Ubuntu 上 `apt-get install yosys iverilog nextpnr-ecp5`（`continue-on-error: true`），但**不依赖它成功**。
+**如实说明 CI 的实际覆盖范围**（以下是实测结论，不是推测）：
 
-- **CI 保证的**：解析层与算法层全部通过（SDC 解析、报告解析、STA 计算、翻转率与功耗模型、流程编排错误路径），使用仓库内提交的**真实工具输出**作为固定输入。
-- **CI 不保证的**：真实的综合、布局布线、时序收敛实验与形式等价检查。这些测试由 `tests/conftest.py` 在**运行时探测工具可用性**决定是否执行，不可用则**跳过**（不是通过）。
-- 每个 job 都会先跑 `python -m tclab env` 打印**实际找到了哪些工具**，日志里能直接看出本次运行跳过多少。
+workflow 会在 Ubuntu 上**尽力** `apt-get install yosys iverilog nextpnr-ecp5`（`continue-on-error: true`），并且**实际装上了**。所以：
 
-**完整流程必须本地装 OSS CAD Suite。CI 只验证解析与算法层**——这是有意的降级，不会用跳过伪装成绿灯。
+| 环境 | 真实情况（实测） |
+|---|---|
+| **Ubuntu-latest** | apt 装上的 `yosys`/`iverilog`/`nextpnr-ecp5` **确实可用**，因此**绝大多数 EDA 集成测试在 CI 上真跑并通过**：三个变体的 RTL 自检仿真、综合产网表、综合确定性、布局布线出报告并解析、流水提升 Fmax、以及**流水等价的形式化证明**。 |
+| **Ubuntu-latest 的缺口** | Ubuntu 归档里的 `nextpnr-ecp5` **版本较旧、没有 `--sdc` 选项**（报 `unrecognised option '--sdc'`），因此「SDC 真的被 nextpnr 读取」这一项在那里**跳过**并给出原因。 |
+| **Windows-latest** | runner 上没有任何 EDA 工具，10 项 EDA 集成测试全部**跳过**。 |
+| **两个平台都保证** | 268 项解析层与算法层测试**全部执行并通过**，使用仓库内提交的**真实工具输出**（`samples/`）作为固定输入。 |
 
-**CI 的真实历史**：第一次推送后 **CI 是红的**。原因不是降级策略，而是上面第 13 条——可用性探测把「命令找不到」的输出当成了版本号，导致 EDA 集成测试在无工具链的 runner 上真的执行并失败。修掉探测逻辑（改为按输出内容判断）并补了回归测试后重新推送，CI 转绿。这个失败被保留在记录里，而不是悄悄重跑掩盖掉。
+为了应对这种版本差异，`tclab.flow` 会**探测** `nextpnr-ecp5` 是否支持 `--sdc`：支持则传入，不支持则**省略该参数并告警**（`require_sdc=True` 可改为硬失败）。让流程在旧版工具上直接崩掉不是好的工程做法，但把「约束没生效」这件事**静默吞掉**更糟——所以这里是显式告警。
+
+每个 job 都会先跑 `python -m tclab env` 打印**实际找到了哪些工具**，日志里能直接看出本次运行跳过多少。
+
+**完整流程仍然需要本地装 OSS CAD Suite**（CI 上的 Ubuntu 工具版本较旧，缺 `--sdc`）。
+
+**CI 的真实历史**：第一次推送后 **CI 是红的**。原因不是降级策略，而是上面第 13 条——可用性探测把「命令找不到」的输出当成了版本号，导致 EDA 集成测试在没有工具链的 runner 上真的执行并失败。修掉探测逻辑后第二次推送，暴露出第 14 条（旧版 nextpnr 没有 `--sdc`）与 yosys stat 输出格式差异，一并修掉并补了回归测试。这两个失败都保留在记录里，而不是悄悄重跑掩盖掉。
 
 ---
 

@@ -14,6 +14,7 @@ import pytest
 
 from tclab import flow as F
 from tclab import report_parse as R
+from tclab import runner as RR
 from tclab import sta as S
 
 from .conftest import requires_eda
@@ -108,6 +109,94 @@ def test_metrics_of_failed_variant_reports_error():
     assert m["ok"] is False
     assert m["error"] == "yosys exploded"
     assert "fmax_mhz" not in m
+
+
+def test_place_and_route_omits_sdc_when_the_tool_lacks_it(monkeypatch):
+    """Version drift: the nextpnr in a distro archive may have no --sdc.
+
+    SYMPTOM: CI failed on Ubuntu with "unrecognised option '--sdc'". The tool
+    there is older than the OSS CAD Suite build this lab targets, so the flag
+    must be probed rather than assumed.
+    """
+
+    class _P:
+        returncode = 0
+        stdout = ""
+        stderr = ""
+        duration_s = 0.0
+
+        @property
+        def output(self):
+            return self.stdout + ("\n" + self.stderr if self.stderr else "")
+
+    captured = {}
+
+    def fake_run(tool, args=(), **kwargs):
+        captured["args"] = list(args)
+        return _P()
+
+    monkeypatch.setattr(F, "run_tool", fake_run)
+    monkeypatch.setattr(F, "_sdc_supported", lambda chain: False)
+
+    with pytest.warns(RuntimeWarning):
+        F.place_and_route(
+            "a.json",
+            "b.json",
+            sdc_in="constr/fir_block_nextpnr.sdc",
+            chain=RR.Toolchain(wrapper=None, prefix=[]),
+        )
+    assert "--sdc" not in captured["args"]
+
+
+def test_place_and_route_can_require_sdc(monkeypatch):
+    class _P:
+        returncode = 0
+        stdout = ""
+        stderr = ""
+        duration_s = 0.0
+
+        @property
+        def output(self):
+            return ""
+
+    monkeypatch.setattr(F, "run_tool", lambda *a, **k: _P())
+    monkeypatch.setattr(F, "_sdc_supported", lambda chain: False)
+    with pytest.raises(F.FlowError):
+        F.place_and_route(
+            "a.json",
+            "b.json",
+            sdc_in="constr/fir_block_nextpnr.sdc",
+            require_sdc=True,
+            chain=RR.Toolchain(wrapper=None, prefix=[]),
+        )
+
+
+def test_place_and_route_includes_sdc_when_supported(monkeypatch):
+    class _P:
+        returncode = 0
+        stdout = ""
+        stderr = ""
+        duration_s = 0.0
+
+        @property
+        def output(self):
+            return ""
+
+    captured = {}
+
+    def fake_run(tool, args=(), **kwargs):
+        captured["args"] = list(args)
+        return _P()
+
+    monkeypatch.setattr(F, "run_tool", fake_run)
+    monkeypatch.setattr(F, "_sdc_supported", lambda chain: True)
+    F.place_and_route(
+        "a.json",
+        "b.json",
+        sdc_in="constr/fir_block_nextpnr.sdc",
+        chain=RR.Toolchain(wrapper=None, prefix=[]),
+    )
+    assert "--sdc" in captured["args"]
 
 
 # ---------------------------------------------------------------------------

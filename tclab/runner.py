@@ -40,6 +40,7 @@ __all__ = [
     "tool_versions",
     "tools_available",
     "probe_tool",
+    "tool_supports",
     "looks_like_missing_tool",
     "ToolUnavailable",
 ]
@@ -441,3 +442,33 @@ def tools_available(chain: Toolchain | None = None) -> bool:
     skipping, which is exactly the false signal this project must not emit.
     """
     return all(probe_tool(tool, args, chain=chain)[0] for tool, args in TOOL_PROBES)
+
+
+_HELP_CACHE: dict[tuple[str, str], bool] = {}
+
+
+def tool_supports(
+    tool: str,
+    flag: str,
+    chain: Toolchain | None = None,
+    timeout: float = 60.0,
+) -> bool:
+    """Does *tool* advertise *flag* in its ``--help`` output?
+
+    Version drift is real between the OSS CAD Suite build this lab was developed
+    against and the older packages a distro ships. Notably, the ``nextpnr-ecp5``
+    in Ubuntu's archive is old enough to have **no ``--sdc`` option at all**,
+    while nextpnr-0.10-82 has one. Probing beats assuming: without this the flow
+    hard-fails on any machine whose nextpnr predates SDC support.
+    """
+    key = (tool, flag)
+    if key in _HELP_CACHE:
+        return _HELP_CACHE[key]
+    try:
+        r = run_tool(tool, ["--help"], check=False, timeout=timeout, chain=chain)
+        text = r.output
+    except (ToolError, ToolUnavailable):
+        text = ""
+    supported = flag in text
+    _HELP_CACHE[key] = supported
+    return supported

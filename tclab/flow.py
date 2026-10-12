@@ -17,6 +17,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import warnings
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
@@ -246,13 +247,37 @@ def place_and_route(
     chain: Toolchain | None = None,
     timeout: float = 3600.0,
     allow_timing_fail: bool = True,
-):
-    """Run ``nextpnr-ecp5`` with SDC constraints and detailed timing reporting."""
+    require_sdc: bool = False,
+) -> Any:
+    """Run ``nextpnr-ecp5`` with SDC constraints and detailed timing reporting.
+
+    ``--sdc`` is passed only if the installed nextpnr actually advertises it.
+    The OSS CAD Suite build used here (nextpnr-0.10-82) does; the older package
+    in a distro archive may not, and passing an unknown option there is a hard
+    error rather than a warning. Set ``require_sdc=True`` to make the absence an
+    error instead of a degradation.
+    """
     args = list(DEVICE_ARGS)
     args += ["--json", str(json_in)]
     args += ["--lpf-allow-unconstrained"]
+    sdc_used = False
     if sdc_in is not None:
-        args += ["--sdc", str(sdc_in)]
+        if _sdc_supported(chain):
+            args += ["--sdc", str(sdc_in)]
+            sdc_used = True
+        elif require_sdc:
+            raise FlowError(
+                "this nextpnr-ecp5 build does not support --sdc, so the timing "
+                f"constraints in {sdc_in} cannot be applied"
+            )
+        else:
+            log_hint = f" (see {log})" if log else ""
+            warnings.warn(
+                f"nextpnr-ecp5 does not support --sdc; running without the "
+                f"constraints in {sdc_in}{log_hint}",
+                RuntimeWarning,
+                stacklevel=2,
+            )
     if freq_mhz is not None:
         args += ["--freq", f"{freq_mhz:g}"]
     if no_tmdriv:
@@ -266,7 +291,18 @@ def place_and_route(
         # Without this nextpnr exits non-zero whenever the design misses its
         # target frequency, which is exactly the situation this lab measures.
         args += ["--timing-allow-fail"]
-    return run_tool("nextpnr-ecp5", args, log_path=log, chain=chain, timeout=timeout)
+    result = run_tool("nextpnr-ecp5", args, log_path=log, chain=chain, timeout=timeout)
+    try:
+        setattr(result, "sdc_applied", sdc_used)
+    except AttributeError:  # pragma: no cover - ToolResult is a plain dataclass
+        pass
+    return result
+
+
+def _sdc_supported(chain: Toolchain | None) -> bool:
+    from .runner import tool_supports
+
+    return tool_supports("nextpnr-ecp5", "--sdc", chain=chain)
 
 
 def run_variant(

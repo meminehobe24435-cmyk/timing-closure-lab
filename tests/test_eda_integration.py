@@ -53,23 +53,37 @@ def test_synthesis_produces_a_json_netlist(tmp_path):
     assert out.stat().st_size > 1000
 
 
+def _ff_count_from_json(path) -> int:
+    """Count flip-flop primitives in a synthesised JSON netlist.
+
+    Read from the netlist rather than from the log: yosys's stat output format
+    differs between versions (the older package in a distro archive prints a
+    different layout), while the JSON cell types are stable.
+    """
+    import json
+
+    netlist = json.loads(Path(path).read_text(encoding="utf-8"))
+    count = 0
+    for module in netlist.get("modules", {}).values():
+        for cell in module.get("cells", {}).values():
+            if str(cell.get("type", "")).endswith("TRELLIS_FF"):
+                count += 1
+    return count
+
+
 def test_pipelined_variant_synthesises_more_flops_than_baseline(tmp_path):
     """The pipeline really does add registers -- a cheap sanity check on chparam.
 
     SYMPTOM this guards: chparam silently not applying, so every variant would
     synthesise the same baseline and the timing comparison would be meaningless.
     """
-    import re
-
-    def ff_count(style: int, stages: int) -> int:
-        out = tmp_path / f"n_{style}_{stages}.json"
-        r = F.synth(str(out), chparams={"SUM_STYLE": style, "PIPE_STAGES": stages})
-        counts = [int(m) for m in re.findall(r"^\s+(\d+)\s+TRELLIS_FF", r.output, re.MULTILINE)]
-        assert counts, "no TRELLIS_FF count in the synthesis log"
-        return max(counts)
-
-    base = ff_count(0, 0)
-    piped = ff_count(1, 2)
+    a = tmp_path / "base.json"
+    b = tmp_path / "piped.json"
+    F.synth(str(a), chparams={"SUM_STYLE": 0, "PIPE_STAGES": 0})
+    F.synth(str(b), chparams={"SUM_STYLE": 1, "PIPE_STAGES": 2})
+    base = _ff_count_from_json(a)
+    piped = _ff_count_from_json(b)
+    assert base > 0, "no flip-flops found in the baseline netlist"
     assert piped > base, f"expected the retimed build to add flops ({piped} vs {base})"
 
 
@@ -92,7 +106,17 @@ def test_place_and_route_reads_the_sdc_and_reports(tmp_path):
     nextpnr echoes ``Info: constraining clock net 'clk' to <freq> MHz`` when it
     has read a create_clock. That line is the evidence the constraint took
     effect, and it is what this test asserts on.
+
+    Skipped when the installed nextpnr predates ``--sdc`` support: the package in
+    Ubuntu's archive has no such option, so there is no way to apply constraints
+    there. That is a real toolchain limitation, not something to paper over --
+    ``tclab.flow`` detects it and omits the flag with a warning.
     """
+    from tclab.runner import tool_supports
+
+    if not tool_supports("nextpnr-ecp5", "--sdc"):
+        pytest.skip("installed nextpnr-ecp5 does not support --sdc")
+
     js = tmp_path / "n.json"
     rep = tmp_path / "r.json"
     log = tmp_path / "pnr.log"
